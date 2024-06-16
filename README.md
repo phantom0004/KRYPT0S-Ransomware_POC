@@ -1,5 +1,7 @@
 # _KRYPT0S: Complex Python Ransomware Simulation for Windows
 
+![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/5f7b96c4-2b21-4039-8b66-b708893c9949)
+
 ## **Warning: Legal and Ethical Disclaimer**
 
 **WARNING: This project is intended solely for educational purposes and should only be executed in a controlled, sandboxed environment. Use of this software on any real-world systems is highly illegal and can result in severe criminal penalties, including imprisonment. The creator of this project is not responsible for any inappropriate use. YOU HAVE BEEN WARNED.**
@@ -27,7 +29,7 @@ _KRYPT0S_ is a sophisticated Python ransomware simulation designed to demonstrat
 _KRYPT0S_ employs various sophisticated techniques to ensure its effectiveness and stealth:
 
 - **Startup Commands**: Disables security services and shadow copies, modifies boot policies to prevent recovery, and stops various antivirus processes.
-- **Encryption**: Encrypts a wide range of file types across all detected drives using AES encryption. The encryption key is securely handled in memory to avoid detection.
+- **Encryption**: Encrypts a wide range of file types across all detected drives using AES encryption. The encryption key is generated in a manner that makes it difficult for potential forensics to uncover, including zeroing out data and special handling of the key in certain parts of memory.
 - **Event Log Removal**: Attempts to clear Windows event logs to cover its tracks.
 - **Persistence**: Modifies the Windows registry to ensure it runs at startup, maintaining persistence across reboots.
 
@@ -47,10 +49,9 @@ This project should be used only for educational purposes in a safe, controlled 
 To run _KRYPT0S_, follow these steps in a sandboxed environment:
 
 1. **Initial Check**: The program attempts to connect to a specific URL. If the connection is successful, it will terminate itself.
-2. **Execution Warning**: Prompts the user twice to confirm execution, preventing accidental launches.
-3. **System Commands**: Disables security measures and prepares the system for encryption.
-4. **Encryption Process**: Encrypts files on all detected drives using AES encryption.
-5. **Display Ransomware Screen**: Launches the fake ransomware screen to complete the simulation.
+2. **System Commands**: Disables security measures and prepares the system for encryption.
+3. **Encryption Process**: Encrypts files on all detected drives using AES encryption.
+4. **Display Ransomware Screen**: Launches the fake ransomware screen to complete the simulation.
 
 **Remember: This program is for educational purposes only. Do not use it on any real-world systems.**
 
