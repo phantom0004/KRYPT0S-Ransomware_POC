@@ -74,8 +74,4 @@ _KRYPT0S_ is a powerful and complex Python ransomware simulation designed to edu
 
 ---
 
-Feel free to contribute to this project by submitting issues or pull requests. For any questions or concerns, please contact the project maintainer.
-
----
-
 **Disclaimer**: The author is not responsible for any misuse of this software. Use it only for educational purposes in controlled environments.
