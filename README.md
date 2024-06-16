@@ -61,10 +61,11 @@ This project should be used only for educational purposes in a safe, controlled 
 
 To run _KRYPT0S_, follow these steps in a sandboxed environment:
 
-1. **Initial Check**: The program attempts to connect to a specific URL. If the connection is successful, it will terminate itself.
-2. **System Commands**: Disables security measures and prepares the system for encryption.
-3. **Encryption Process**: Encrypts files on all detected drives using AES encryption.
-4. **Display Ransomware Screen**: Launches the fake ransomware screen to complete the simulation.
+1. **How to Run**: Convert both .py files to an .exe file (use pyinstaller). Proceed to run "_KRYPTOS.exe", the "Screen.exe" will run at the end. 
+2. **Initial Check**: The program attempts to connect to a specific URL. If the connection is successful, it will terminate itself.
+3. **System Commands**: Disables security measures and prepares the system for encryption.
+4. **Encryption Process**: Encrypts files on all detected drives using AES encryption.
+5. **Display Ransomware Screen**: Launches the fake ransomware screen to complete the simulation.
 
 **Remember: This program is for educational purposes only. Do not use it on any real-world systems.**
 
