@@ -1,5 +1,5 @@
-# _KRYPT0S : Encrypt, Conceal, Control
-![Screenshot 2024-06-16 201230](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/ecd22bc8-33c4-4331-80cc-3cdbb08b0437)
+# _KRYPT0S : Encrypt, Conceal, Control    ---    An Proof Of Concept Project
+![Cyber-Ransomware-GettyImages-1399980046-825x444](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/e4d2625d-7b9a-498c-b3d9-753d28db8497)
 
 ## **Warning: Legal and Ethical Disclaimer**
 
