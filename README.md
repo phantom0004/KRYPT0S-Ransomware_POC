@@ -1,4 +1,4 @@
-# _KRYPT0S: Complex Python Ransomware Simulation for Windows
+# _KRYPT0S : Encrypt, Conceal, Control
 
 ![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/4c7d4641-8d20-45f3-8515-6efc7212d485)
 
