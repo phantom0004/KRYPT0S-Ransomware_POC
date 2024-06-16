@@ -143,7 +143,7 @@ def main():
     bitcoin_label = tk.Label(bitcoin_frame, text="Bitcoin Address:", font=("Helvetica", 14, "bold"), fg="white", bg="#b22222")
     bitcoin_label.pack(pady=5)
     
-    bitcoin_address = tk.Label(bitcoin_frame, text="1Nbxs9a1a7f18SKAFXxXvjbbK69JKMBwks", font=("Helvetica", 14), fg="white", bg="#b22222")
+    bitcoin_address = tk.Label(bitcoin_frame, text="(FAKE)1Nbxs9a1a7f18SKAFXxXvjbbK69JKMBwks(FAKE)", font=("Helvetica", 14), fg="white", bg="#b22222")
     bitcoin_address.pack(pady=5)
     
     copy_button = tk.Button(bitcoin_frame, text="Copy Address", font=("Helvetica", 12), fg="white", bg="gray", command=copy_to_clipboard)
