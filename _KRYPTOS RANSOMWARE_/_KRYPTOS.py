@@ -1,3 +1,11 @@
+# ========================================================================================
+#  KRYPTOS - Encrypt, Conceal, Control (A proof of concept project)
+#
+#  CREATED BY PHANTOM0004 (All rights reserved)
+#  Check out my penetration testing repo! -> https://github.com/phantom0004/PenTest_Vault
+# ========================================================================================
+# ! SEE ETHICAL USAGE MESSAGE BELOW CODE BEFORE USAGE ! -> ABIDE BY THE LAW ALWAYS!
+# ========================================================================================
 import os
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
@@ -243,3 +251,14 @@ def main():
 
 if __name__ == "__main__":
     main() # Launch _KRYPT0s
+
+# I AM NOT RESPONSIBLE FOR ANY MISDOINGS
+# 
+# This project is intended for educational purposes only. The creator does not condone or endorse any malicious use of this code.
+# 
+# By using this project, you agree to use it responsibly and ethically. Any misuse of this code that results in harm or damage to systems,
+# individuals, or organizations is solely the responsibility of the user.
+# 
+# Please use this project to learn and improve your understanding of cybersecurity concepts, and always practice good ethics and legal compliance.
+# 
+# Remember, with great power comes great responsibility!
