@@ -1,5 +1,7 @@
 # Understanding the Damage and Importance of Ransomware Awareness
 
+![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/60c8466f-cbb2-40f9-ac6e-39dcff05772e)
+
 ## **Introduction**
 
 Ransomware is a type of malicious software designed to block access to a computer system or data until a sum of money is paid. It represents one of the most significant and growing threats in cybersecurity today. Understanding the potential damage and importance of being aware of ransomware is crucial for individuals and organizations alike.
