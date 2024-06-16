@@ -1,7 +1,5 @@
 # _KRYPT0S : Encrypt, Conceal, Control
 
-![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/4c7d4641-8d20-45f3-8515-6efc7212d485)
-
 ## **Warning: Legal and Ethical Disclaimer**
 
 **WARNING: This project is intended solely for educational purposes and should only be executed in a controlled, sandboxed environment. Use of this software on any real-world systems is highly illegal and can result in severe criminal penalties, including imprisonment. The creator of this project is not responsible for any inappropriate use. YOU HAVE BEEN WARNED.**
@@ -51,6 +49,8 @@ The program includes a fake ransomware screen that mimics the appearance of the 
 - **Simulated Buttons and Functionality**: The screen is designed to look realistic, but all buttons and functions are simulated and have no real effect.
 - **Preventing Closure**: The ransomware screen disables the close button (X) and removes the Alt+F4 bindings to prevent the tab from being closed. It also makes it difficult to terminate using traditional task manager methods.
 - **Enhanced Persistence**: The screen continues to add persistence by checking if the registry key exists every few seconds, preventing its removal.
+
+![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/4c7d4641-8d20-45f3-8515-6efc7212d485)
 
 ## **Ethical and Safe Usage**
 
