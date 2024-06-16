@@ -33,6 +33,16 @@ _KRYPT0S_ employs various sophisticated techniques to ensure its effectiveness a
 - **Event Log Removal**: Attempts to clear Windows event logs to cover its tracks.
 - **Persistence**: Modifies the Windows registry to ensure it runs at startup, maintaining persistence across reboots.
 
+## **No Decryption Function Present**
+
+One critical aspect of _KRYPT0S_ is the absence of a decryption algorithm. This means that once your files have been encrypted, there is no built-in method to retrieve them. Similar to many real-world ransomware attacks, this design underscores the severe and often irreversible consequences of such malware.
+
+Once encryption has occurred, the file extensions are altered, making it incredibly difficult to decrypt and identify the original files. This complexity is compounded when multiple machines are infected, leading to a chaotic and nearly impossible decryption process. Real-world ransomware often promises victims that they will regain access to their data upon payment. However, this promise is frequently broken. For instance, the WannaCry ransomware allowed partial decryption, but the likelihood of fully recovering all files after paying the ransom was extremely low.
+
+This deceptive tactic is a psychological manipulation, creating a false sense of security that paying the ransom will solve the problem. In reality, paying the ransom rarely guarantees file recovery and only fuels the ransomware economy, encouraging further attacks.
+
+The lack of a decryption function in _KRYPT0S_ serves as a stark reminder of the importance of understanding and preparing for ransomware threats. It highlights the critical need for robust cybersecurity measures and reinforces the advice of cybersecurity experts: **Never pay the ransom**. Paying not only fails to guarantee the return of your data but also perpetuates the cycle of cybercrime. It is essential to focus on prevention, regular backups, and comprehensive security protocols to mitigate the risk and impact of ransomware attacks.
+
 ### **Ransomware Screen**
 
 The program includes a fake ransomware screen that mimics the appearance of the WannaCry ransomware, providing a realistic simulation environment:
