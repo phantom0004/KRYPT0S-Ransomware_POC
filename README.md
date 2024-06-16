@@ -1,4 +1,5 @@
-# _KRYPT0S : Encrypt, Conceal, Control
+# _KRYPT0S : Encrypt, Conceal, Control    ---    An Proof Of Concept Project
+![Screenshot 2024-06-16 201230](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/4c3b82a8-5a5f-48a5-a6f6-658d26c7610d)
 
 ## **Warning: Legal and Ethical Disclaimer**
 
@@ -70,10 +71,6 @@ To run _KRYPT0S_, follow these steps in a sandboxed environment:
 ## **Conclusion**
 
 _KRYPT0S_ is a powerful and complex Python ransomware simulation designed to educate and inform about the workings of real ransomware. By understanding these mechanisms, cybersecurity professionals can better defend against such threats. Always use responsibly and within the bounds of the law.
-
----
-
-Feel free to contribute to this project by submitting issues or pull requests. For any questions or concerns, please contact the project maintainer.
 
 ---
 

