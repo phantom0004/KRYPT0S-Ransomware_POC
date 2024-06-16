@@ -39,6 +39,8 @@ The program includes a fake ransomware screen that mimics the appearance of the 
 
 - **Fake Bitcoin Address and Information**: All displayed information is fake and generated for simulation purposes. None of it is real.
 - **Simulated Buttons and Functionality**: The screen is designed to look realistic, but all buttons and functions are simulated and have no real effect.
+- **Preventing Closure**: The ransomware screen disables the close button (X) and removes the Alt+F4 bindings to prevent the tab from being closed. It also makes it difficult to terminate using traditional task manager methods.
+- **Enhanced Persistence**: The screen continues to add persistence by checking if the registry key exists every few seconds, preventing its removal.
 
 ## **Ethical and Safe Usage**
 
