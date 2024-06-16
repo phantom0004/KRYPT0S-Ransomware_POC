@@ -1,6 +1,6 @@
 # _KRYPT0S: Complex Python Ransomware Simulation for Windows
 
-![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/5f7b96c4-2b21-4039-8b66-b708893c9949)
+![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/4c7d4641-8d20-45f3-8515-6efc7212d485)
 
 ## **Warning: Legal and Ethical Disclaimer**
 
