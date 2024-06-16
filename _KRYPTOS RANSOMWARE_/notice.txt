@@ -1,0 +1,6 @@
+NOTICE:
+
+When testing in a sandboxed enviroment, you will encounter MANY permission errors (kryptos will just skip these), however this means that not all files will be encrypted. 
+
+Kryptos utalizes several commands to try elevate privelleges, however if this doesnt work, it will work with the current permissions it has.
+Running as admin will cause a significant increase in encyrptions which can be leveraged to test this application further and see the outcome and time it takes.
