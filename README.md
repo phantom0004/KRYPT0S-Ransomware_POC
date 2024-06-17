@@ -70,12 +70,15 @@ To run _KRYPT0S_, follow these steps in a sandboxed environment:
 ### **Kryptos in Action**
 
 _Image showing the aftermath of the attack_
+
 ![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/5d40c892-6a5e-4f3e-aec7-414444e0cc20)
 
 _Aftermath of homescreen after attack_
+
 ![TensorPix-clideo_editor_3033212161eb46f28859aeb5ec54c1d9-ezgif com-optimize](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/b2f88001-29db-434f-9622-f145ef088d8e)
 
 _Files encyrpted_
+
 ![448269530_1179477683084760_6477171426049375204_n](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/c77c0d75-f1ed-487e-b17a-be9d45736bc3)
 
 ## **Conclusion**
