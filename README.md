@@ -34,13 +34,11 @@ _KRYPT0S_ employs various sophisticated techniques to ensure its effectiveness a
 
 ## **No Decryption Function Present**
 
-One critical aspect of _KRYPT0S_ is the absence of a decryption algorithm. This means that once your files have been encrypted, there is no built-in method to retrieve them. Similar to many real-world ransomware attacks, this design underscores the severe and often irreversible consequences of such malware.
+A key feature of KRYPT0S is the lack of a decryption algorithm, meaning encrypted files cannot be retrieved. This design mirrors real-world ransomware, emphasizing the severe consequences of such malware.
 
-Once encryption has occurred, the file extensions are altered, making it incredibly difficult to decrypt and identify the original files. This complexity is compounded when multiple machines are infected, leading to a chaotic and nearly impossible decryption process. Real-world ransomware often promises victims that they will regain access to their data upon payment. However, this promise is frequently broken. For instance, the WannaCry ransomware allowed partial decryption, but the likelihood of fully recovering all files after paying the ransom was extremely low.
+Once encrypted, file extensions change, making decryption and identification difficult. This becomes even more challenging if multiple machines are infected, resulting in a chaotic decryption process. Ransomware often falsely promises data recovery upon payment, as seen with WannaCry, which rarely allowed full file recovery after ransom payment.
 
-This deceptive tactic is a psychological manipulation, creating a false sense of security that paying the ransom will solve the problem. In reality, paying the ransom rarely guarantees file recovery and only fuels the ransomware economy, encouraging further attacks.
-
-The lack of a decryption function in _KRYPT0S_ serves as a stark reminder of the importance of understanding and preparing for ransomware threats. It highlights the critical need for robust cybersecurity measures and reinforces the advice of cybersecurity experts: **Never pay the ransom**. Paying not only fails to guarantee the return of your data but also perpetuates the cycle of cybercrime. It is essential to focus on prevention, regular backups, and comprehensive security protocols to mitigate the risk and impact of ransomware attacks.
+This tactic manipulates victims into believing that paying will solve the problem, but it rarely does and encourages more attacks. The absence of a decryption function in KRYPT0S underscores the need for robust cybersecurity. Experts advise against paying the ransom, as it doesn’t guarantee data return and fuels cybercrime. Instead, focus on prevention, regular backups, and strong security protocols to mitigate ransomware risks.
 
 ### **Ransomware Screen**
 
@@ -75,7 +73,7 @@ _Image showing the aftermath of the attack_
 ![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/5d40c892-6a5e-4f3e-aec7-414444e0cc20)
 
 _Aftermath of homescreen after attack_
-![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/c9d6b66d-83e9-4297-a206-739911a8ec88)
+https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/9eb03988-c8bb-4bad-b421-1a2df5e3a0e1
 
 _Files encyrpted_
 ![448269530_1179477683084760_6477171426049375204_n](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/c77c0d75-f1ed-487e-b17a-be9d45736bc3)
