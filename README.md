@@ -69,6 +69,9 @@ To run _KRYPT0S_, follow these steps in a sandboxed environment:
 
 **Remember: This program is for educational purposes only. Do not use it on any real-world systems.**
 
+Image showing the aftermath of the attack
+![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/5d40c892-6a5e-4f3e-aec7-414444e0cc20)
+
 ## **Conclusion**
 
 _KRYPT0S_ is a powerful and complex Python ransomware simulation designed to educate and inform about the workings of real ransomware. By understanding these mechanisms, cybersecurity professionals can better defend against such threats. Always use responsibly and within the bounds of the law.
