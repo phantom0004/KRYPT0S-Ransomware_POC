@@ -69,8 +69,16 @@ To run _KRYPT0S_, follow these steps in a sandboxed environment:
 
 **Remember: This program is for educational purposes only. Do not use it on any real-world systems.**
 
-Image showing the aftermath of the attack
+### **Kryptos in Action**
+
+_Image showing the aftermath of the attack_
 ![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/5d40c892-6a5e-4f3e-aec7-414444e0cc20)
+
+_Aftermath of homescreen after attack_
+![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/c9d6b66d-83e9-4297-a206-739911a8ec88)
+
+_Files encyrpted_
+![448269530_1179477683084760_6477171426049375204_n](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/c77c0d75-f1ed-487e-b17a-be9d45736bc3)
 
 ## **Conclusion**
 
