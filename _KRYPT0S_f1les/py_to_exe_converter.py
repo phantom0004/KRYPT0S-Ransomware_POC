@@ -107,30 +107,40 @@ def clean_pyinstaller_artifacts(executable_name):
     
     # Delete build directory
     if os.path.exists(build_dir):
-        print(f"Removing directory: {build_dir}")
-        shutil.rmtree(build_dir)
+        try:
+            shutil.rmtree(build_dir)
+        except:
+            print(f"Unable to delete the following directory : {build_dir}")
     
     # Delete __pycache__ directory
     if os.path.exists(pycache_dir):
-        print(f"Removing directory: {pycache_dir}")
-        shutil.rmtree(pycache_dir)
+        try:
+            shutil.rmtree(pycache_dir)
+        except:
+            print(f"Unable to delete the following directory : {pycache_dir}")
     
     # Delete the spec file
     if os.path.exists(spec_file):
-        print(f"Removing file: {spec_file}")
-        os.remove(spec_file)
+        try:
+            os.remove(spec_file)
+        except:
+            print(f"Unable to delete the following directory : {spec_file}")
     
     # Move the executable to the current directory
     if os.path.exists(executable_path):
-        print(f"Moving executable: {executable_name}.exe to current directory")
-        shutil.move(executable_path, new_executable_path)
+        try:
+            shutil.move(executable_path, new_executable_path)
+        except:
+            print(f"Unable to move executable file {executable_name} to : {new_executable_path}")
     
     # Delete dist directory
     if os.path.exists(dist_dir):
-        print(f"Removing directory: {dist_dir}")
-        shutil.rmtree(dist_dir)
+        try:        
+            shutil.rmtree(dist_dir)
+        except:
+            print(f"Unable to delete the following directory : {dist_dir}")
     
-    print(f"Cleanup completed for {executable_name}.")
+    print(f"[*] Cleanup completed for {executable_name}")
 
 def banner():
     print("""
@@ -138,7 +148,8 @@ def banner():
         | |/ /  _ \ \ / /_   _|  _ \ / _ \/ ___|  / ___|| ____|_   _| | | |  _ \ 
         | ' /| |_) \ V /  | | | |_) | | | \___ \  \___ \|  _|   | | | | | | |_) |
         | . \|  _ < | |   | | |  __/| |_| |___) |  ___) | |___  | | | |_| |  __/ 
-     ___|_|\_\_| \_\|_|   |_| |_|    \___/|____/  |____/|_____| |_|  \___/|_|      
+     ___|_|\_\_| \_\|_|   |_| |_|    \___/|____/  |____/|_____| |_|  \___/|_|   
+        
     """)
 
 banner()    
