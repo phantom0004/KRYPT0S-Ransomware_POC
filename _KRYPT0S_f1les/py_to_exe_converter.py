@@ -12,6 +12,19 @@ def parse_pip_output(pip_output, library_name):
         return f"[!] {library_name} installed in user site-packages due to permission issues."
     else:
         return f"[-] Unable to parse PIP output for {library_name}. The below snippet log was captured : {pip_output[:40]}"
+
+def check_os():
+    if os.name != 'nt':
+        print("[-] OS ERROR")
+        print("You are not running a Windows OS.")
+        print("Converting a .py to a .exe file from a non-Windows OS will result in creating an executable for that system.")
+        print("This is not a script limitation but a general limitation found in all conversion systems.")
+        print("To run this successfully, ensure the OS you are running this script on is a Windows machine.")
+        print("This will ensure the conversion will work and the .py file will change to a .exe file.")
+        
+        exit()
+        
+    print("[✔] Running windows OS \n")
     
 def download_library(libraries):
     print("[*] Checking and downloading required PIP libraries")
@@ -77,6 +90,18 @@ def payload_conversion():
         os.chdir("..") # Traverse a directory back
     
     print("[*] Conversion Completed. Please check the 'krytp0s output conversion' folder to view the output")
+
+def banner():
+    print("""
+         _  ________   _______ ____   ___  ____    ____  _____ _____ _   _ ____  
+        | |/ /  _ \ \ / /_   _|  _ \ / _ \/ ___|  / ___|| ____|_   _| | | |  _ \ 
+        | ' /| |_) \ V /  | | | |_) | | | \___ \  \___ \|  _|   | | | | | | |_) |
+        | . \|  _ < | |   | | |  __/| |_| |___) |  ___) | |___  | | | |_| |  __/ 
+     ___|_|\_\_| \_\|_|   |_| |_|    \___/|____/  |____/|_____| |_|  \___/|_|      
+    """)
+
+banner()    
+check_os()
 
 libraries = ["pycryptodome", "requests", "pywin32", "winreg"]
 libraries_check_section(libraries)
