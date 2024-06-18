@@ -64,7 +64,7 @@ def payload_conversion():
     
     try:
         os.chdir("krytp0s output conversion")
-    except FileExistsError:
+    except FileNotFoundError:
         exit("Unable to find 'krytp0s output conversion' folder, ensure it has been created and is found in this directory before continuing.")
     except Exception as err:
         exit(f"An unknown system error occured when trying to traverse a path : {err}")
