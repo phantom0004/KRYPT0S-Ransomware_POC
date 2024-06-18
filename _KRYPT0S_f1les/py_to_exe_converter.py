@@ -90,7 +90,7 @@ def payload_conversion():
         if result.returncode == 0:
             print(f"[+] File {name} has been converted to {file_name}.exe.")
         else:
-            exit(f"[-] A fatal error occurred: {result.stderr}. Please try again later")
+            exit(f"[-] A fatal error occurred: {result.stderr}. If this issue persists, try re-installing 'pyinstaller")
             
         os.chdir("..") # Traverse a directory back
         break
@@ -112,7 +112,7 @@ def delete_unwanted_files():
 banner()    
 check_os()
 
-libraries = ["pycryptodome", "requests", "pywin32", "winreg"]
+libraries = ["pycryptodome", "requests", "pywin32", "winreg", "pyinstaller"]
 # libraries_check_section(libraries)
 
 payload_conversion()
