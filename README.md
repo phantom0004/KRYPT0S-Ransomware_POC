@@ -57,6 +57,7 @@ This project should be used only for educational purposes in a safe, controlled 
 To run _KRYPT0S_, follow these steps in a sandboxed environment:
 
 1. **How to Run**: Convert both .py files to an .exe file (using the kryptos converter). Proceed to run "_KRYPTOS.exe", the "Screen.exe" will run at the end.
+   
 _The converter used in this repository ensures you are running on a windows enviroment, running it in a UNIX enviroment will not work!_
 
 Upon execution, KRYPT0S will identify all present drives and initiate encryption of all content within its specified extension range. This includes the encryption of .exe files in critical locations such as "/Downloads", "/OneDrive", and more. The destructive nature of KRYPT0S is severe, causing the system to halt due to the loss of sensitive and essential information. Such tactics are designed to induce a clear message of fear and destruction, highlighting the critical importance of protecting against these types of attacks.
