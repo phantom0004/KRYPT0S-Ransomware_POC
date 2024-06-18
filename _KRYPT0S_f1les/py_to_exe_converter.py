@@ -91,11 +91,49 @@ def payload_conversion():
             print(f"[+] File {name} has been converted to {file_name}.exe.")
         else:
             exit(f"[-] A fatal error occurred: {result.stderr}. If this issue persists, try re-installing 'pyinstaller")
+        
+        clean_pyinstaller_artifacts(name, file_name)
             
         os.chdir("..") # Traverse a directory back
-        break
+        
     
     print("[*] Conversion Completed. Please check the 'krytp0s output conversion' folder to view the output")
+
+def clean_pyinstaller_artifacts(script_name, executable_name):
+    # Define paths
+    build_dir = 'build'
+    pycache_dir = '__pycache__'
+    spec_file = f'{script_name}.spec'
+    dist_dir = 'dist'
+    executable_path = os.path.join(dist_dir, f'{executable_name}.exe')
+    new_executable_path = os.path.join('..', f'{executable_name}.exe')
+    
+    # Delete build directory
+    if os.path.exists(build_dir):
+        print(f"Removing directory: {build_dir}")
+        shutil.rmtree(build_dir)
+    
+    # Delete __pycache__ directory
+    if os.path.exists(pycache_dir):
+        print(f"Removing directory: {pycache_dir}")
+        shutil.rmtree(pycache_dir)
+    
+    # Delete the spec file
+    if os.path.exists(spec_file):
+        print(f"Removing file: {spec_file}")
+        os.remove(spec_file)
+    
+    # Move the executable to the parent directory
+    if os.path.exists(executable_path):
+        print(f"Moving executable: {executable_name}.exe to parent directory")
+        shutil.move(executable_path, new_executable_path)
+    
+    # Delete dist directory
+    if os.path.exists(dist_dir):
+        print(f"Removing directory: {dist_dir}")
+        shutil.rmtree(dist_dir)
+    
+    print(f"Cleanup completed for {executable_name}.")
 
 def banner():
     print("""
@@ -113,6 +151,6 @@ banner()
 check_os()
 
 libraries = ["pycryptodome", "requests", "pywin32", "winreg", "pyinstaller"]
-# libraries_check_section(libraries)
+libraries_check_section(libraries)
 
 payload_conversion()
