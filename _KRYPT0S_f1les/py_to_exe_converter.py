@@ -1,7 +1,12 @@
-import subprocess, os
-import re
-import time 
+import subprocess, os 
 import shutil
+
+# Development message
+print("THIS IS STILL IN DEVELOPMENT AND WILL PROBABLY NOT WORK IN THE MEANTIME, this will be completed soon! - The developer :)")
+try:
+    input("Press any key to continue with the installation, use ctrl+c to cancel and exit . . .")
+except KeyboardInterrupt:
+    exit()
 
 def parse_pip_output(pip_output, library_name):
     if "Successfully installed" in pip_output:
@@ -24,7 +29,7 @@ def check_os():
         
         exit()
         
-    print("[✔] Running windows OS \n")
+    print("[✔] Running windows OS")
     
 def download_library(libraries):
     print("[*] Checking and downloading required PIP libraries")
@@ -88,6 +93,7 @@ def payload_conversion():
             exit(f"[-] A fatal error occurred: {result.stderr}. Please try again later")
             
         os.chdir("..") # Traverse a directory back
+        break
     
     print("[*] Conversion Completed. Please check the 'krytp0s output conversion' folder to view the output")
 
@@ -100,10 +106,13 @@ def banner():
      ___|_|\_\_| \_\|_|   |_| |_|    \___/|____/  |____/|_____| |_|  \___/|_|      
     """)
 
+def delete_unwanted_files():
+    pass
+
 banner()    
 check_os()
 
 libraries = ["pycryptodome", "requests", "pywin32", "winreg"]
-libraries_check_section(libraries)
+# libraries_check_section(libraries)
 
 payload_conversion()
