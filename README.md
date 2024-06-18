@@ -53,19 +53,21 @@ The program includes a fake ransomware screen that mimics the appearance of the 
 
 ## **Ethical and Safe Usage**
 
-This project should be used only for educational purposes in a safe, controlled environment. It is equipped with a kill switch that stops the ransomware if a certain condition is met. This ensures that it does not cause any real harm during testing and educational use.
+This project should be used only for educational purposes in a safe, controlled environment. It is equipped with a **kill switch** that stops the ransomware if a certain condition is met. This ensures that it does not cause any real harm during testing and educational use.
 
 ### **Running the Simulation**
 
 To run _KRYPT0S_, follow these steps in a sandboxed environment:
 
-1. **How to Run**: Convert both .py files to an .exe file (use pyinstaller). Proceed to run "_KRYPTOS.exe", the "Screen.exe" will run at the end. 
+1. **How to Run**: Convert both .py files to an .exe file (using the kryptos converter). Proceed to run "_KRYPTOS.exe", the "Screen.exe" will run at the end. 
 2. **Initial Check**: The program attempts to connect to a specific URL. If the connection is successful, it will terminate itself.
-3. **System Commands**: Disables security measures and prepares the system for encryption.
-4. **Encryption Process**: Encrypts files on all detected drives using AES encryption.
-5. **Display Ransomware Screen**: Launches the fake ransomware screen to complete the simulation.
+3. **System Commands**: Tries to disable security measures and prepares the system for encryption by generating the key.
+4. **Encryption Process**: Encrypts files on ALL detected device drives using AES encryption, encyrption will target a wide range of extensions, including .exe (without corrupting the OS).
+5. **Change System Wallpaper**: Changes system wallpaper to indicate an attack has occured, inducing fear into the victim. (Simulated)
+6. **Display Ransomware Screen**: Launches the fake ransomware screen to complete the simulation, this screen adds persistance in the windows registry also.
+7. **Windows Event Log Cleanup**: Attempts to clean all event viewer logs to cover all tracks of system calls and interactions with the OS.
 
-**Remember: This program is for educational purposes only. Do not use it on any real-world systems.**
+**Remember: This program is for educational purposes only. !Do not use it on any real-world systems!**
 
 ### **Kryptos in Action**
 
