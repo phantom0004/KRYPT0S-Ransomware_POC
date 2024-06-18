@@ -1,13 +1,6 @@
 import subprocess, os 
 import shutil
 
-# Development message
-print("THIS IS STILL IN DEVELOPMENT AND WILL PROBABLY NOT WORK IN THE MEANTIME, this will be completed soon! - The developer :)")
-try:
-    input("Press any key to continue with the installation, use ctrl+c to cancel and exit . . .")
-except KeyboardInterrupt:
-    exit()
-
 def parse_pip_output(pip_output, library_name):
     if "Successfully installed" in pip_output:
         return f"[+] Successfully installed {library_name}!"
@@ -29,7 +22,7 @@ def check_os():
         
         exit()
         
-    print("[✔] Running windows OS")
+    print("[✔] Running windows OS \n")
     
 def download_library(libraries):
     print("[*] Checking and downloading required PIP libraries")
@@ -50,7 +43,7 @@ def libraries_check_section(libraries):
 
     download_library(libraries)
 
-    print("\nLIBRARY INSTALLATION COMPLETED")
+    print("\nLIBRARY INSTALLATION COMPLETED\n")
 
 def payload_conversion():
     names = ["_KRYPT0S.py", "Screen.py"]
@@ -84,7 +77,7 @@ def payload_conversion():
             f"../_KRYPT0S_f1les/{name}"
         ]
 
-        print(f"[!] Processing the conversion of '{file_name}'. Please stand by, this may take some time.")
+        print(f"\n[!] Processing the conversion of '{file_name}'. Please stand by, this may take some time.")
         result = subprocess.run(command, capture_output=True, text=True, shell=True)
     
         if result.returncode == 0:
@@ -94,7 +87,7 @@ def payload_conversion():
         
         clean_pyinstaller_artifacts(file_name)
         
-    print("[*] Conversion Completed. Please check the 'krytp0s output conversion' folder to view the output")
+    print("\n[*] Conversion Completed. Please check the 'krytp0s output conversion' folder to view the output")
 
 def clean_pyinstaller_artifacts(executable_name):
     # Define paths
@@ -141,6 +134,7 @@ def clean_pyinstaller_artifacts(executable_name):
             print(f"Unable to delete the following directory : {dist_dir}")
     
     print(f"[*] Cleanup completed for {executable_name}")
+    print() # New line
 
 def banner():
     print("""
