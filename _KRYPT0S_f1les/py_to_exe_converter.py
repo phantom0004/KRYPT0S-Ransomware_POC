@@ -92,21 +92,18 @@ def payload_conversion():
         else:
             exit(f"[-] A fatal error occurred: {result.stderr}. If this issue persists, try re-installing 'pyinstaller")
         
-        clean_pyinstaller_artifacts(name, file_name)
-            
-        os.chdir("..") # Traverse a directory back
+        clean_pyinstaller_artifacts(file_name)
         
-    
     print("[*] Conversion Completed. Please check the 'krytp0s output conversion' folder to view the output")
 
-def clean_pyinstaller_artifacts(script_name, executable_name):
+def clean_pyinstaller_artifacts(executable_name):
     # Define paths
     build_dir = 'build'
     pycache_dir = '__pycache__'
-    spec_file = f'{script_name}.spec'
     dist_dir = 'dist'
+    spec_file = f'{executable_name}.spec'
     executable_path = os.path.join(dist_dir, f'{executable_name}.exe')
-    new_executable_path = os.path.join('..', f'{executable_name}.exe')
+    new_executable_path = f'{executable_name}.exe'
     
     # Delete build directory
     if os.path.exists(build_dir):
@@ -123,9 +120,9 @@ def clean_pyinstaller_artifacts(script_name, executable_name):
         print(f"Removing file: {spec_file}")
         os.remove(spec_file)
     
-    # Move the executable to the parent directory
+    # Move the executable to the current directory
     if os.path.exists(executable_path):
-        print(f"Moving executable: {executable_name}.exe to parent directory")
+        print(f"Moving executable: {executable_name}.exe to current directory")
         shutil.move(executable_path, new_executable_path)
     
     # Delete dist directory
@@ -144,13 +141,10 @@ def banner():
      ___|_|\_\_| \_\|_|   |_| |_|    \___/|____/  |____/|_____| |_|  \___/|_|      
     """)
 
-def delete_unwanted_files():
-    pass
-
 banner()    
 check_os()
 
-libraries = ["pycryptodome", "requests", "pywin32", "winreg", "pyinstaller"]
+libraries = ["pycryptodome", "requests", "pywin32", "pyinstaller"]
 libraries_check_section(libraries)
 
 payload_conversion()
