@@ -1,3 +1,11 @@
+# ========================================================================================
+#  KRYPTOS - Encrypt, Conceal, Control (A proof of concept project)
+#
+#  CREATED BY PHANTOM0004 (All rights reserved)
+#  Check out my penetration testing repo! -> https://github.com/phantom0004/PenTest_Vault
+# ========================================================================================
+# This is the setup tool for _KRYTP0S, will make all .py files to .exe files for windows
+# ========================================================================================
 import subprocess, os 
 import shutil
 
@@ -153,3 +161,5 @@ libraries = ["pycryptodome", "requests", "pywin32", "pyinstaller"]
 libraries_check_section(libraries)
 
 payload_conversion()
+
+# Use ethically!
