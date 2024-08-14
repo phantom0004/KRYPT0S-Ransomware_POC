@@ -1,6 +1,6 @@
 # **Ransomware Defense: Practical Insights and Strategies**
 
-![image]([https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/60c8466f-cbb2-40f9-ac6e-39dcff05772e](https://cdn.vectorstock.com/i/500p/00/37/padlock-concept-cyber-security-protection-vector-47170037.jpg))
+![image](https://cdn.vectorstock.com/i/500p/00/37/padlock-concept-cyber-security-protection-vector-47170037.jpg)
 
 ## **Introduction**
 
