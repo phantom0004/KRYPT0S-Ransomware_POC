@@ -163,7 +163,6 @@ def warning_message():
     print("1) You have the necessary permissions for basic installation tasks.")
     print("2) You have NOT renamed the KRYPT0S Python file or the Screen Python file. The setup file will allow you to do this.")
     print("3) The setup file is in the same directory as Screen.py and _KRYPT0S.py.")
-    print("4) You are using a Windows operating system.")
     
     input("\nPress any key to continue if you agree to the above ... ")
     
