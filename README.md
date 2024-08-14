@@ -46,7 +46,7 @@ The program includes a fake ransomware screen that mimics the appearance of the 
 - **Preventing Closure**: The ransomware screen disables the close button (X) and removes the Alt+F4 bindings to prevent the tab from being closed. It also makes it difficult to terminate using traditional task manager methods.
 - **Enhanced Persistence**: The screen continues to add persistence by checking if the registry key exists every few seconds, preventing its removal.
 
-![image](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/4c7d4641-8d20-45f3-8515-6efc7212d485)
+![image](https://github.com/user-attachments/assets/d3d7814d-7520-484a-b510-c3b9c5ad07c4)
 
 ## **Ethical and Safe Usage**
 
