@@ -72,7 +72,7 @@ _Aftermath of homescreen after attack_
 
 _Files encyrpted_
 
--> TO BE ADDING AN AFTERMATH PHOTO
+![image](https://github.com/user-attachments/assets/6d9cd5a8-93a7-4663-af5e-6981fc7fa9b9)
 
 ## **Conclusion**
 
