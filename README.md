@@ -1,4 +1,4 @@
-# _KRYPT0S : Encrypt, Conceal, Control - Proof Of Concept Project
+# KRYPT0S : Encrypt, Conceal, Control - Proof Of Concept Project
 ![krypt0s-high-resolution-logo](https://github.com/user-attachments/assets/dc9fa9d3-0cfc-4bf8-be4c-cae8dbcc75ba)
 
 ## **Warning: Legal and Ethical Disclaimer**
@@ -9,13 +9,13 @@ This project includes a built-in kill switch to ensure it does not cause real ha
 
 ## **Project Overview**
 
-### **About _KRYPT0S**
+### **About KRYPT0S**
 
-_KRYPT0S_ is a sophisticated Python ransomware simulation designed to demonstrate the complexities and operations of real-life ransomware. Its primary aim is educational, helping cybersecurity professionals and enthusiasts understand how ransomware works to better defend against such threats.
+KRYPT0S_ is a sophisticated Python ransomware simulation designed to demonstrate the complexities and operations of real-life ransomware. Its primary aim is educational, helping cybersecurity professionals and enthusiasts understand how ransomware works to better defend against such threats.
 
 ### **Key Features**
 
-_KRYPT0S_ employs various sophisticated techniques to ensure its effectiveness and stealth:
+KRYPT0S_ employs various sophisticated techniques to ensure its effectiveness and stealth:
 
 - **Complex Encryption Handling**: Utilizes AES encryption to lock files on Windows machines.
 - **Persistence and Stealth**: Gains persistence by modifying system settings and running in the background, even after system reboots.
@@ -54,7 +54,7 @@ This project should be used only for educational purposes in a safe, controlled 
 
 ### **Running the Simulation**
 
-To run _KRYPT0S_, follow these steps in a sandboxed environment:
+To run KRYPT0S_, follow these steps in a sandboxed environment:
 
 1. **How to Run**: Convert both .py files to an .exe file (using the kryptos converter). Proceed to run "_KRYPTOS.exe", the "Screen.exe" will run at the end.
    
@@ -68,15 +68,15 @@ Upon execution, KRYPT0S will identify all present drives and initiate encryption
 
 _Aftermath of homescreen after attack_
 
-![TensorPix-clideo_editor_3033212161eb46f28859aeb5ec54c1d9-ezgif com-optimize](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/b2f88001-29db-434f-9622-f145ef088d8e)
+![TensorPix-clideo_editor_3033212161eb46f28859aeb5ec54c1d9-ezgif com-optimize](https://github.com/phantom0004/KRYPT0S_RANSOMWARE/assets/42916447/b2f88001-29db-434f-9622-f145ef088d8e)
 
 _Files encyrpted_
 
-![448269530_1179477683084760_6477171426049375204_n](https://github.com/phantom0004/_KRYPT0S_RANSOMWARE/assets/42916447/c77c0d75-f1ed-487e-b17a-be9d45736bc3)
+![448269530_1179477683084760_6477171426049375204_n](https://github.com/phantom0004/KRYPT0S_RANSOMWARE/assets/42916447/c77c0d75-f1ed-487e-b17a-be9d45736bc3)
 
 ## **Conclusion**
 
-_KRYPT0S_ is a powerful and complex Python ransomware simulation designed to educate and inform about the workings of real ransomware. By understanding these mechanisms, cybersecurity professionals can better defend against such threats. Always use responsibly and within the bounds of the law.
+KRYPT0S_ is a powerful and complex Python ransomware simulation designed to educate and inform about the workings of real ransomware. By understanding these mechanisms, cybersecurity professionals can better defend against such threats. Always use responsibly and within the bounds of the law.
 
 ---
 
