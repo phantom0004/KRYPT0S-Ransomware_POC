@@ -56,7 +56,7 @@ This project should be used only for educational purposes in a safe, controlled 
 
 To run KRYPT0S, follow these steps in a sandboxed environment:
 
-1. **How to Run**: Convert both .py files to an .exe file (using the kryptos converter). Proceed to run "_KRYPTOS.exe", the "Screen.exe" will run at the end.
+1. **How to Run**: Convert both .py files to an .exe file (using the kryptos converter). Proceed to run "KRYPT0S.exe", the "Screen.exe" will run at the end.
    
 _The converter used in this repository ensures you are running on a windows enviroment, running it in a UNIX enviroment will not work!_
 
