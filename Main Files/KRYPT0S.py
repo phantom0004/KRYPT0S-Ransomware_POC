@@ -329,6 +329,8 @@ def check_debugging_and_virtualization():
 
 # Zero out the key in memory several times
 def zero_memory(buffer):
+    buffer = bytearray(buffer)
+    
     length = len(buffer)
     # First pass: write all ones (0xFF)
     for i in range(length):
