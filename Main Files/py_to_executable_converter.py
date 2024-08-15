@@ -4,7 +4,7 @@
 #  CREATED BY PHANTOM0004 (All rights reserved)
 #  Check out my penetration testing repo! -> https://github.com/phantom0004/PenTest_Vault
 # ========================================================================================
-# This is the setup tool for _KRYPT0S, will convert all .py files to .exe files for Windows
+# This is the setup tool for KRYPT0S, will convert all .py files to .exe files for Windows
 # ========================================================================================
 import subprocess
 import os
@@ -51,7 +51,7 @@ def libraries_check_section():
     print("\nLIBRARY INSTALLATION COMPLETED\n")
 
 def payload_conversion():
-    names = ["_KRYPT0S.py", "Screen.py"]
+    names = ["KRYPT0S.py", "Screen.py"]
     
     output_dir = "krypt0s_output_conversion"
     if not os.path.exists(output_dir):
@@ -65,12 +65,12 @@ def payload_conversion():
     except Exception as err:
         exit(f"Unable to change to '{output_dir}' directory. Ensure it has been created and is found in this directory before continuing. Error: {err}")
     
-    file_name = input("Enter a custom name for the executable file of _KRYPT0S.py (without .exe) -> ").strip()
+    file_name = input("Enter a custom name for the executable file of KRYPT0S.py (without .exe) -> ").strip()
     if not file_name:
         file_name = "KRYPT0S"
         
     for name in names:
-        current_file_name = file_name if name == "_KRYPT0S.py" else "Screen"
+        current_file_name = file_name if name == "KRYPT0S.py" else "Screen"
         command = [
             "pyinstaller",
             "--onefile",
@@ -88,7 +88,7 @@ def payload_conversion():
         else:
             print(f"[-] A fatal error occurred, below is the error log: \n\n{result.stderr}\n")
             print("Tips to fix this issue :\n[1] Ensure the .py files are NOT inside a custom folder, if so put them outside\n[2] Reinstall 'pyinstaller' with PIP if the issue persists")
-            exit("\nIf the issue is still not fixed open an issue on _KRYPT0S repo for further evaluation.\nAlternitivley manually convert the files with 'pyinstaller' tool!")
+            exit("\nIf the issue is still not fixed open an issue on KRYPT0S repo for further evaluation.\nAlternitivley manually convert the files with 'pyinstaller' tool!")
         
         clean_pyinstaller_artifacts(current_file_name)
         
@@ -162,7 +162,7 @@ def warning_message():
     print("!WARNING! Before continuing, please ensure the following: \n")
     print("1) You have the necessary permissions for basic installation tasks.")
     print("2) You have NOT renamed the KRYPT0S Python file or the Screen Python file. The setup file will allow you to do this.")
-    print("3) The setup file is in the same directory as Screen.py and _KRYPT0S.py.")
+    print("3) The setup file is in the same directory as Screen.py and KRYPT0S.py.")
     
     input("\nPress any key to continue if you agree to the above ... ")
     
