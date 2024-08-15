@@ -68,7 +68,7 @@ Upon execution, KRYPT0S will identify all present drives and initiate encryption
 
 _Aftermath of homescreen after attack_
 
--> TO BE ADDING AN AFTERMATH PHOTO
+![Aftermath-gif](https://github.com/user-attachments/assets/d99e527d-c4dc-4503-b03a-ea3ef7b69a76)
 
 _Files encyrpted_
 
