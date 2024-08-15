@@ -68,11 +68,11 @@ Upon execution, KRYPT0S will identify all present drives and initiate encryption
 
 _Aftermath of homescreen after attack_
 
-![TensorPix-clideo_editor_3033212161eb46f28859aeb5ec54c1d9-ezgif com-optimize](https://github.com/phantom0004/KRYPT0SRANSOMWARE/assets/42916447/b2f88001-29db-434f-9622-f145ef088d8e)
+-> TO BE ADDING AN AFTERMATH PHOTO
 
 _Files encyrpted_
 
-![448269530_1179477683084760_6477171426049375204_n](https://github.com/phantom0004/KRYPT0SRANSOMWARE/assets/42916447/c77c0d75-f1ed-487e-b17a-be9d45736bc3)
+-> TO BE ADDING AN AFTERMATH PHOTO
 
 ## **Conclusion**
 
