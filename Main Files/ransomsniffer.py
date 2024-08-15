@@ -1,3 +1,6 @@
+import yara
+import pefile
+
 def banner():
     banner = r"""
             .-""-.
