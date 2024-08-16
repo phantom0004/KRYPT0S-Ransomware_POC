@@ -9,8 +9,8 @@ def banner():
           | |    | |
           | |.-""-.|
          ///`.::::.`\
-        ||| ::/  \:: ;        Ransomware Sniffer
-        ||; ::\__/:: ;         Detect | Response
+        ||| ::/  \:: ;                Ransomware Sniffer
+        ||; ::\__/:: ;     Detect and Defend Before the Threat Begins.
          \\\ '::::' /
           `=':-..-'`
     """
