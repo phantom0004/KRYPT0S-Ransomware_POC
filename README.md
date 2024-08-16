@@ -1,5 +1,5 @@
 # KRYPT0S : Encrypt, Conceal, Control - Proof Of Concept Project
-![krypt0s-high-resolution-logo](https://github.com/user-attachments/assets/dc9fa9d3-0cfc-4bf8-be4c-cae8dbcc75ba)
+![imgonline-com-ua-twotoone-GZF5poVOco](https://github.com/user-attachments/assets/c42f8ade-6eff-4064-828e-42652f911602)
 
 ## **Warning: Legal and Ethical Disclaimer**
 
