@@ -2,7 +2,10 @@ import yara
 import pefile
 import time
 import os
-import yara_rules as y_rules
+try:
+    import yara_rules as y_rules
+except ModuleNotFoundError:
+    print("Yara rule file not found. Please ensure you have the 'yara_rules.py' file in the same directory!")
 
 def intro_banner():
     banner = r"""
