@@ -1,3 +1,6 @@
+"""
+!!!IN DEVELOPMENT - NOT READY FOR USAGE!!!
+"""
 # Main Libraries
 try:
     import yara
@@ -27,6 +30,7 @@ def intro_banner():
         ||; ::\__/:: ;   Detect and Defend Before the Threat Begins.
          \\\ '::::' /
           `=':-..-'`
+    !CURRENTLY IN DEVELOPMENT!
     """
     
     options = """
