@@ -1,23 +1,17 @@
-"""
-!!!IN DEVELOPMENT - NOT READY FOR USAGE!!!
-"""
-# Main Libraries
+import time
+import os
+try:
+    from malware_detection import yara_rules
+    from malware_detection import pe_analysis
+    from malware_detection import virus_total
+except ModuleNotFoundError:
+    exit("Custom modules not found. Please ensure you have the 'yara_rules.py', 'pe_analysis.py' and 'virus_total.py'!")
 try:
     import yara
     import pefile
 except ModuleNotFoundError:
-    exit("Yara and/or Pefile library not found. Please install all required libraries via the 'requirements.txt' file with PIP")
-import time
-import os
-# Custom Modules
-try:
-    from malware_detection import yara_rules
-    from malware_detection import virus_total
-    from malware_detection import pe_analysis
-except ModuleNotFoundError:
-    exit("Custom modules not found. Please ensure you have the 'yara_rules', 'virus_total' and 'pe_analysis' python modules in the same directory!")
+    exit("Yara and/or pefile not found! Please ensure you download all dependancies from the 'requirements.txt' file")
 
-# Ransomsniffer intro banner
 def intro_banner():
     banner = r"""
             .-""-.
@@ -30,7 +24,6 @@ def intro_banner():
         ||; ::\__/:: ;   Detect and Defend Before the Threat Begins.
          \\\ '::::' /
           `=':-..-'`
-    !CURRENTLY IN DEVELOPMENT!
     """
     
     options = """
@@ -47,7 +40,6 @@ Please choose an option:
 """
     print(banner+options)
 
-# Ransomsniffer scanning banner
 def scan_banner():    
     banner = r"""
 ______  ___   _   _  _____  ________  ___ _____ _   _ _________________   _____ _____   ___   _   _ 
@@ -60,7 +52,6 @@ ______  ___   _   _  _____  ________  ___ _____ _   _ _________________   _____ 
     
     print(banner+"\n")
 
-# Tells user that he is being redirected after menu selection
 def menu_switch(choice):
     print(f"Redirecting you to choice {choice} ...")
     time.sleep(1)
@@ -68,11 +59,9 @@ def menu_switch(choice):
     os.system("cls") if os.name == "nt" else os.system("clear")
     scan_banner()
 
-# Perform virus total scan via API
 def virus_total_scan():
     pass
 
-# Display help menu showing user how to get a virus total API key
 def display_API_help():
     print("""
 - VirusTotal Information: -
@@ -86,11 +75,9 @@ VirusTotal is an online service that scans files and URLs using multiple antivir
 Simply paste the API key when prompted after selecting option [1] (VirusTotal Scan).
     """)
 
-# Regular scan menu, using yara and pefile
 def default_yara_scan():
     pass
 
-# Handle user choice arguments for main menu
 def handle_user_arguments():
     try:
         usr_input = input("Choice > ")
@@ -108,10 +95,6 @@ def handle_user_arguments():
         default_yara_scan()
     elif usr_input == "3":
         display_API_help()
-
-# Extract bytes from file for analysis
-def extract_bytes_from_file(path):
-    pass
 
 def main():
     intro_banner()
