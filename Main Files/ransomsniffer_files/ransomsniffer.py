@@ -7,7 +7,7 @@ try:
 except ModuleNotFoundError:
     exit("Custom modules not found. Please ensure you have the 'yara_rules.py', 'pe_analysis.py' and 'virus_total.py'!")
 try:
-    import yara 
+    import yara
     import pefile
 except ModuleNotFoundError:
     exit("Yara and/or pefile not found! Please ensure you download all dependancies from the 'requirements.txt' file")
@@ -65,10 +65,7 @@ def menu_switch(choice):
 # Start virus total scan using module
 def virus_total_scan():    
     API_KEY = input("Enter your VirusTotal API key > ").strip()
-    
-    # Test Data (Will be deleted)
-    choice = "urls" 
-    data = "br-icloud.com.br"
+    data, choice = virus_total_user_arguments()
 
     # Create the VirusTotalAPI object without client_obj initially
     virus_total_object = virus_total.VirusTotalAPI(choice, data, API_KEY)
@@ -88,16 +85,46 @@ def virus_total_scan():
     else:
         virus_total_object.parse_API_output(output)
 
+# Handle user input for the virus total API
+def virus_total_user_arguments():
+    print("\nPlease select what you wish to scan :")
+    print("[1] Scan a file \n[2] Scan a URL")
+    user_choice = input("Choice > ").strip()
+    print()
+    
+    data = ""
+    if user_choice == "1":
+        data = input("Enter a file hash or file path to scan > ")
+        if "/" in data or "\\" in data or "." in data:
+            hash_algo = input("Enter the hashing algorithm to use [md5, sha1, sha256] (Leave blank for sha256) > ").strip().lower()
+            data = hash_file(data, hash_algo)
+            if not data: 
+                exit("[-] File does not exist in system! Please ensure the path is valid")
+            else:
+                print(f"[+] Successfully hashed file using {hash_algo}. Scanning -> {data}")
+    elif user_choice == "2":
+        data = input("Enter the URL you wish to scan > ")
+    else:
+        exit("[-] Invalid Input! Please enter a value between 1 and 2")
+
+    print("\t\t   ------- \n")
+    user_choice = "files" if user_choice == "1" else "urls"
+    return data, user_choice
+
 # Hash file for virus total scan
-def hash_file(path, hash_algo):
+def hash_file(path, hash_algo="sha256"):
+    virus_total_object = virus_total.VirusTotalAPI()
+    
     if not os.path.exists(path):
         return None
+    if hash_algo not in ["md5", "sha256", "sha1"]:
+        hash_algo = "sha256"
     
     file_data = r""
     with open(path, "rb") as file:
         file_data = file.read()
     
-    return virus_total.hash_file(file_data, hash_algo)
+    return virus_total_object.hash_file(file_data, hash_algo)
 
 # Display virus total help menu
 def display_API_help():
