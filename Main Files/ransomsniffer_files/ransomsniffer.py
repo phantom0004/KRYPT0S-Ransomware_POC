@@ -1,6 +1,7 @@
 import time
 import os
 try:
+    from malware_detection import yara_analysis
     from malware_detection import pe_analysis
     from malware_detection import virus_total
 except ModuleNotFoundError:
