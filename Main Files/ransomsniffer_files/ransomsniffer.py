@@ -1,14 +1,11 @@
 import time
 import os
 try:
-    from malware_detection import yara_rules
     from malware_detection import pe_analysis
     from malware_detection import virus_total
 except ModuleNotFoundError:
     exit("Custom modules not found. Please ensure you have the 'yara_rules.py', 'pe_analysis.py' and 'virus_total.py'!")
 try:
-    import yara 
-    import pefile
     from termcolor import colored
 except ModuleNotFoundError:
     exit("Missing Dependancies! Please ensure you download all dependancies from the 'requirements.txt' file")
