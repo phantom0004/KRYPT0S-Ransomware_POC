@@ -75,7 +75,7 @@ rule common_web_file_extensions
         $csr_signing_request = "-----BEGIN CERTIFICATE REQUEST-----" nocase
 
         // WebAssembly
-        $wasm_header = "\00asm" 
+        $wasm_header = "\\00asm" 
         $wasm_hex = {00 61 73 6D}
 
         // Java Server Pages (JSP)
@@ -109,4 +109,3 @@ rule commmon_zip_extensions
     condition:
         any of them at 0
 }
-
