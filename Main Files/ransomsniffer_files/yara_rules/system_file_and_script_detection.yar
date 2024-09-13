@@ -1,5 +1,5 @@
-# This is a VERY broad yara file, and due to the immense amout of rules needed top cover all languages, this is just POC
-# However, although this does not cover all languages, it can catch many languages in a more broader aspect (Will not know the language, but will know it is a script of some sort)
+// This is a VERY broad Yara file, and due to the immense amount of rules needed to cover all languages, this is just a POC.
+// Although this does not cover all languages, it can detect scripts in a broader sense (It may not identify the language but will detect that it is a script).
 
 rule scripting_languages_detection
 {
@@ -69,25 +69,41 @@ rule identify_script_file
 
     strings:
         // Detect function definitions across various languages
-        $function_define = "function " nocase | "def " nocase | "sub " nocase | "fn " nocase
-        
+        $function_define_1 = "function " nocase
+        $function_define_2 = "def " nocase
+        $function_define_3 = "sub " nocase
+        $function_define_4 = "fn " nocase
+
         // Detect class definitions across various languages
-        $class_define = "class " nocase | "module " nocase
-        
+        $class_define_1 = "class " nocase
+        $class_define_2 = "module " nocase
+
         // Detect import or include statements
-        $import = "import " nocase | "require " nocase | "#include " nocase
+        $import_1 = "import " nocase
+        $import_2 = "require " nocase
+        $import_3 = "#include " nocase
 
         // Detect comments in various scripting languages
-        $comment = "#" nocase | "//" nocase | "/*" nocase
+        $comment_1 = "#" nocase
+        $comment_2 = "//" nocase
+        $comment_3 = "/*" nocase
 
         // Detect variable initialization across different languages
-        $variable_initilization = "let " nocase | "var " nocase | "const " nocase
+        $variable_init_1 = "let " nocase
+        $variable_init_2 = "var " nocase
+        $variable_init_3 = "const " nocase
 
         // Detect variable types in languages that use typing
-        $variable_type = "int " nocase | "float " nocase | "string " nocase | "bool " nocase | "char " nocase
+        $variable_type_1 = "int " nocase
+        $variable_type_2 = "float " nocase
+        $variable_type_3 = "string " nocase
+        $variable_type_4 = "bool " nocase
+        $variable_type_5 = "char " nocase
 
         // Detect print statements across different languages
-        $print_statement = "print(" nocase | "printf(" nocase | "echo " nocase
+        $print_statement_1 = "print(" nocase
+        $print_statement_2 = "printf(" nocase
+        $print_statement_3 = "echo " nocase
 
     condition:
         any of them
