@@ -6,16 +6,12 @@ rule windows_executable_extension_rule
         date = "2024-09-12"
 
     strings:
-        // Hexadecimal Values
-        $exe = {4D 5A}  // .exe files
-        $com = {4D 5A}  // .com files
-        $bat = "echo"   // Simple batch file (BAT)
-        $scr = {4D 5A}  // Screensaver files (.scr)
+        $portable_executable = {4D 5A}  // MZ header for .exe, .com, and .scr files
         $msi = {D0 CF 11 E0 A1 B1 1A E1}  // .msi Windows Installer files use the OLE Compound Format
-        $wsf = {3C 3F 78 6D 6C} // .wsf files
+        $wsf = {3C 3F 78 6D 6C}  // .wsf files
     
     condition:
-        any of them at 0
+        $portable_executable at 0 or $msi at 0 or $wsf at 0
 }
 
 rule windows_script_rule
@@ -27,18 +23,16 @@ rule windows_script_rule
 
     strings:
         // .bat & .cmd files (Batch Files)
-        $bat_print  = "echo" nocase
         $bat_file_start = "@echo off" nocase
-        $bat_comment = "rem" nocase
+        $bat_comment = "rem " nocase
 
         // .vba files (Visual Basic for Applications)
         $vba_variable_define = "Dim" nocase
-        $vba_string_start = "Sub" nocase
         $vba_string_end = "End Sub" nocase
 
         // .ps1 files (Powershell)
         $powershell_paramater = "param(" nocase
-        $powershell_print = "Write_Host" nocase
+        $powershell_print = "Write-Host" nocase
 
         // .wsf files (Windows Script File)
         $wsf_root_element = "<job>" nocase
@@ -65,12 +59,7 @@ rule office_extension_rule
         $office_legacy = {D0 CF 11 E0 A1 B1 1A E1}  // OLE Compound File Format for .doc, .xls, .ppt, .pub, .vsd
 
         // Modern Office formats (Word, Excel, PowerPoint, macro-enabled)
-        $word_docx = {50 4B 03 04}  // ZIP format for .docx
-        $word_docm = {50 4B 03 04}  // ZIP format for .docm (macro-enabled Word files)
-        $excel_xlsx = {50 4B 03 04}  // ZIP format for .xlsx
-        $excel_xlsm = {50 4B 03 04}  // ZIP format for .xlsm (macro-enabled Excel files)
-        $pptx = {50 4B 03 04}  // ZIP format for .pptx
-        $pptm = {50 4B 03 04}  // ZIP format for .pptm (macro-enabled PowerPoint files)
+        $office_zip_format = {50 4B 03 04}  // Common ZIP header for .docx, .docm, .xlsx, .xlsm, .pptx, .pptm
 
         // PDF file
         $pdf = {25 50 44 46 2D}  // "%PDF-" magic number for PDF files
@@ -79,9 +68,7 @@ rule office_extension_rule
         $rtf = {7B 5C 72 74 66 31}  // "rtf1" magic number for RTF files
 
         // OpenDocument formats (LibreOffice and OpenOffice)
-        $odt = {50 4B 03 04}  // ZIP format for .odt
-        $ods = {50 4B 03 04}  // ZIP format for .ods
-        $odp = {50 4B 03 04}  // ZIP format for .odp
+        $opendocument_format = {50 4B 03 04}
 
         // Microsoft OneNote files
         $onenote = {E4 52 5C 7B 8C D8 A4 1D}  // Magic number for OneNote .one files
@@ -90,6 +77,6 @@ rule office_extension_rule
         $excel_xlsb = {D0 CF 11 E0 A1 B1 1A E1}  // Excel binary format (legacy .xlsb)
 
     condition:
-        any of them at 0
+        $office_legacy at 0 or $office_zip_format at 0 or $pdf at 0 or $rtf at 0 or $opendocument_format at 0 or $onenote at 0 or $excel_xlsb at 0
 }
 
