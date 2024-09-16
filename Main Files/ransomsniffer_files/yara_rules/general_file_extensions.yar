@@ -16,7 +16,7 @@ rule image_extension_rule
         $ico = {00 00 01 00}  // ICO files (Windows icon format)
 
     condition:
-        any of them at 0 
+        $jpg at 0 or $png at 0 or $gif at 0 or $bmp at 0 or $tiff_be at 0 or $tiff_le at 0 or $webp at 0 or $ico at 0
 }
 
 rule video_extension_rule
@@ -38,7 +38,7 @@ rule video_extension_rule
         $3gp = {66 74 79 70 33 67}  // 3GP (ftyp 3gp)
     
     condition:
-        any of them at 0
+        $mp4 at 0 or $mov at 0 or $avi at 0 or $wmv at 0 or $flv at 0 or $mkv at 0 or $webm at 0 or $mpeg2 at 0 or $3gp at 0
 }
 
 rule common_web_file_extensions
@@ -107,5 +107,5 @@ rule commmon_zip_extensions
         $cab = {4D 53 43 46}  // CAB (Windows Cabinet)
 
     condition:
-        any of them at 0
+        $arc at 0 or $arj at 0 or $gzip at 0 or $rar at 0 or $sit at 0 or $zip at 0
 }
